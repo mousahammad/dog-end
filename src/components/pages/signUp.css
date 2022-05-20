@@ -1,0 +1,20 @@
+.signUP-1-col {
+  background-image: url(https://nationaltoday.com/wp-content/uploads/2022/01/National-Dog-Walker-Appreciation-Day.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.signUp-row {
+  margin-top: 2%;
+  height: 80%;
+}
+.account-img-box {
+  padding: 20px;
+}
+.account-img {
+  height: 150px;
+  width: 1250px;
+  box-shadow: 1px 6px 9px 3px rgb(175, 174, 174);
+  border-radius: 100%;
+}
