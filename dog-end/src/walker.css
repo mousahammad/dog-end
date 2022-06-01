@@ -1,0 +1,148 @@
+/* trainer card */
+.containerWalker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.containerWalker .card {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  background: #666666a1;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.containerWalker .card:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #9bdc28;
+  clip-path: circle(150px at 80% 20%);
+  transition: 0.5s ease-in-out;
+}
+.containerWalker .card:hover:before {
+  clip-path: circle(300px at 80% -20%);
+}
+
+.containerTrainer .card .imgBx {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-70%);
+  z-index: 1000;
+  width: 100%;
+  height: 220px;
+  transition: 0.5s;
+}
+.containerTrainer .card:hover .imgBx {
+  top: 12%;
+  transform: translateY(0%);
+}
+.containerTrainer .card .imgBx img {
+  position: absolute;
+  top: 20%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  width: 45%;
+  border-radius: 15px;
+}
+.containerTrainer .card .contentBx {
+  position: absolute;
+  bottom: -6%;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: 1s;
+  z-index: 10;
+}
+.containerTrainer .card:hover .contentBx {
+  height: 65%;
+}
+.containerTrainer .card .contentBx h2 {
+  position: relative;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+  margin: 0;
+}
+.containerTrainer .card .contentBx .info,
+.containerTrainer .card .contentBx .color {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 60px;
+  transition: 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: rgb(172, 172, 154);
+}
+.containerTrainer .card:hover .contentBx .info {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.5s;
+}
+.containerTrainer .card:hover .contentBx .color {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.5s;
+}
+/* .containerTrainer .card .contentBx .info h3,
+.containerTrainer .card .contentBx .color h3 {
+  color: #fff;
+  font-weight: 300;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 10px;
+} */
+/* .containerTrainer .card .contentBx .info span {
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  line-height: 26px;
+  font-size: 14px;
+  display: inline-block;
+  color: #111;
+  background: #fff;
+  margin: 0 5px;
+  transition: 0.5s;
+  color: #111;
+  border-radius: 4px;
+  cursor: pointer;
+} */
+/* .containerTrainer .card .contentBx .info span:hover {
+  background: #d9e2c9;
+} */
+/* .containerTrainer .card .contentBx .color span {
+  width: 30px;
+  height: 20px;
+  background: #ff0;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+} */
+
+/* .containerTrainer .card .contentBx a {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 4px;
+  margin-top: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  color: rgb(75, 39, 195);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 0.5s;
+  margin-top: 0;
+}
+.containerTrainer .card:hover .contentBx a {
+  opacity: 1;
+  transform: translateY(0px);
+  transition-delay: 0.75s;
+} */
