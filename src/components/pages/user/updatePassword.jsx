@@ -1,53 +1,50 @@
 import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
-import userService, { login } from "../../services/userService/userService";
+import userService from "../../../services/userService/userService";
 import { Formik } from "formik";
 import { useCookies } from "react-cookie";
 import { Link, Route } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const LoginTo = () => {
-  const [cookies, setCookie] = useCookies(["data"]);
-  const navigate = useNavigate();
-
-  console.log("cookies data", cookies.data);
-
-  if (cookies.data) {
-    window.location = "/profile";
+const UpdatePassword = () => {
+  const params = useParams();
+  if (!params.id || !params.token) {
+    window.location = "/login";
   }
 
   return (
     <Container>
       <Formik
         initialValues={{
-          email: "",
           password: "",
+          retypePassword: "",
         }}
         validate={(values) => {
           const errors = {};
-          if (!values.email) {
-            errors.email = "Required";
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-          ) {
-            errors.email = "Invalid email address";
-          }
           if (!values.password) {
             errors.password = "Required";
-          } else if (
-            values.password.length < 6 ||
-            values.password.length > 255
-          ) {
-            errors.password = "Invalid password";
+          } else if (!values.retypePassword) {
+            errors.retypePassword = "Required";
+          } else if (values.password !== values.retypePassword) {
+            errors.password = errors.retypePassword = "הסיסמאות לא זהות";
           }
+
           return errors;
         }}
         onSubmit={async (values) => {
           try {
-            await userService.login(values.email, values.password);
+            if (values.password !== values.retypePassword) {
+              return;
+            }
+
+            await userService.updatePassword({
+              _id: params.id,
+              tokenRef: params.token,
+              password: values.password,
+            });
             // ToastContainer
-            toast.success("🦄 נרשמתם בהצלחה", {
+            toast.success("הסיסמה עודכנה בהצלחה ", {
               position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
@@ -56,11 +53,11 @@ const LoginTo = () => {
               draggable: true,
               progress: undefined,
             });
-            window.location = "/home";
-            // console.log(data);
+
+            window.location = "/login";
           } catch ({ response }) {
             // ToastContainer
-            toast.error("😯 התחברות לא הצליחה", {
+            toast.error(response.data, {
               position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
@@ -99,29 +96,13 @@ const LoginTo = () => {
                 <form onSubmit={handleSubmit} className="form-signin ">
                   <h1 className="h3 mb-3 font-weight-normal">..קדימה להתחבר</h1>
 
-                  <label htmlFor="inputEmail" className="sr-only">
-                    אימייל
-                  </label>
-                  <input
-                    type="text"
-                    name="email"
-                    className="form-control"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                    placeholder="email"
-                  />
-                  {errors.email && touched.email ? (
-                    <div>{errors.email}</div>
-                  ) : null}
-                  <br />
-                  <label htmlFor="inputPassword" className="sr-only ">
-                    סיסמה
+                  <label htmlFor="password" className="sr-only">
+                    סיסמה חדשה
                   </label>
                   <input
                     type="password"
                     name="password"
-                    className="form-control "
+                    className="form-control"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.password}
@@ -130,25 +111,31 @@ const LoginTo = () => {
                   {errors.password && touched.password ? (
                     <div>{errors.password}</div>
                   ) : null}
-                  <br />
+
+                  <label htmlFor="inputPassword2" className="sr-only">
+                    הכנס סיסמה חדשה שוב
+                  </label>
+                  <input
+                    type="password"
+                    name="retypePassword"
+                    className="form-control"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.retypePassword}
+                    placeholder="retypePassword"
+                  />
+                  {errors.retypePassword && touched.retypePassword ? (
+                    <div>{errors.retypePassword}</div>
+                  ) : null}
 
                   <button
                     className="btn btn-lg btn-primary btn-block"
                     type="submit"
                     disabled={isSubmitting}
                   >
-                    כניסה
+                    שלח
                   </button>
                 </form>
-
-                <button
-                  className="btn btn-lg btn-primary btn-block"
-                  onClick={() => {
-                    navigate("/sendEmail");
-                  }}
-                >
-                  שכחתי סייסמה
-                </button>
               </div>
             </div>
           </>
@@ -157,4 +144,4 @@ const LoginTo = () => {
     </Container>
   );
 };
-export default LoginTo;
+export default UpdatePassword;

@@ -6,10 +6,10 @@ import { Formik } from "formik";
 
 import React, { useState, useEffect } from "react";
 
-import { useNavigate } from "react-router-dom";
 import "../signUp.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useCookies } from "react-cookie";
+import { useParams } from "react-router-dom";
 const TOKEN_KEY = "token";
 
 const getDateFormat = (date) => {
@@ -27,26 +27,28 @@ const getDateFormat = (date) => {
 const EditUser = () => {
   const [cookies, setCookie] = useCookies(["data"]);
   const [load, setLoad] = useState(true);
-
-  const navigate = useNavigate();
+  const params = useParams();
 
   //image upload states
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [userInfo, setUserInf] = useState(null);
   const [imgError, setImgError] = useState("");
+
+  if (!cookies.data) {
+    window.location = "/login";
+  }
   // const regButton = document.getElementById("regButton");
 
   //get information about user from data base
   const getInfoUser = async () => {
     try {
-      if (!cookies.data) {
-        navigate("/profile");
+      if (!params.id) {
+        window.location = "/login";
       }
-
       setLoad(true);
 
-      let info = await userService.getInfoUserById(cookies.data._id);
+      let info = await userService.getInfoUserById(params.id);
 
       if (info.data[0].image) {
         setImagePreview(config.pictureUrl + info.data[0]._id + ".jpg");
@@ -82,35 +84,21 @@ const EditUser = () => {
     console.log("change img");
   }
 
-  //cloudinary
-  // async function uploadImage() {
-  //   const data = new FormData();
-  //   if (!image) {
-  //     return "";
-  //   }
-  //   data.append("file", image);
-  //   data.append("upload_preset", "myUploadPreset");
-  //   try {
-  //     setUploadingImg(true);
-  //     let res = await fetch(
-  //       "https://api.cloudinary.com/v1_1/antoncloudinary/image/upload",
-  //       {
-  //         method: "post",
-  //         body: data,
-  //       }
-  //     );
-  //     const urlData = await res.json();
-  //     setUploadingImg(false);
-  //     console.log(urlData);
-  //     return urlData.url;
-  //   } catch (error) {
-  //     setUploadingImg(false);
-  //     console.log(error);
-  //   }
-  // }
+  const deleteImage = async () => {
+    try {
+      await userService.deleteImage(params.id);
+      setUserInf((userInfo) => {
+        return { ...userInfo, image: false };
+      });
+
+      setImagePreview(config.defaultImage);
+    } catch ({ response }) {
+      console.log(response.data);
+    }
+  };
 
   if (load) {
-    return <h1>Loading ...</h1>;
+    return <h1>טעון תוכן ...</h1>;
   }
 
   return (
@@ -119,7 +107,6 @@ const EditUser = () => {
         <Container>
           <h1 className="text-center m-0">עדכון פרטיים אישיים</h1>
           <Row className="signUp-row">
-            <Col className="signUP-1-col" md={8} sm={false}></Col>
             <Col className="signUP-2-col">
               {userInfo !== null && (
                 <Formik
@@ -158,7 +145,7 @@ const EditUser = () => {
                       values.firstName.length > 255
                     ) {
                       errors.firstName = "Invalid firstName";
-                    } else if (/^[0-9]*$/i.test(values.firstName))
+                    } else if (!/^[a-zA-Zא-ת]*$/i.test(values.firstName))
                       errors.firstName = "Your name is Invalid";
 
                     if (!values.lastName) {
@@ -168,7 +155,7 @@ const EditUser = () => {
                       values.lastName.length > 255
                     ) {
                       errors.lastName = "Invalid lastName";
-                    } else if (/^[0-9]*$/i.test(values.lastName))
+                    } else if (!/^[a-zA-Zא-ת ]*$/i.test(values.lastName))
                       errors.lastName = "Your lastName is Invalid";
 
                     if (!values.email) {
@@ -237,7 +224,7 @@ const EditUser = () => {
                         image: values.image,
                       };
 
-                      const user = await userService.editUser(data);
+                      const user = await userService.editUser(data, params.id);
                       console.log(user.data.token);
                       setCookie(TOKEN_KEY, user.data.token);
                       if (values.image) {
@@ -257,7 +244,7 @@ const EditUser = () => {
                         draggable: true,
                         progress: undefined,
                       });
-                      window.location = `/profile`;
+                      window.location = `/${params.location}`;
                     } catch ({ response }) {
                       console.log(response.data);
                     }
@@ -274,27 +261,41 @@ const EditUser = () => {
                     isSubmitting,
                     /* and other goodies */
                   }) => (
-                    <Container style={{ width: "100%" }}>
+                    <Container style={{ width: "100%", height: "100%" }}>
                       <div>
                         {/* account image */}
-                        <div className="account-img-box col-12">
+                        <div className="account-img-box text-center col-4">
                           <Form.Label
                             htmlFor="image-upload"
                             className="image-upload-label"
                           >
                             {imagePreview !== null && (
-                              <img
-                                src={imagePreview}
-                                className="account-img"
-                                alt="account-image"
-                                style={{
-                                  width: "60%",
-                                  height: "auto",
-                                  borderRadius: 15,
-                                }}
-                              />
+                              <>
+                                <img
+                                  src={imagePreview}
+                                  className="account-img"
+                                  alt="account-image"
+                                  style={{
+                                    width: "100%",
+                                    height: "auto",
+                                    borderRadius: "35px",
+                                  }}
+                                />
+
+                                {imagePreview !== config.defaultImage && (
+                                  <button
+                                    className="btn btn-danger"
+                                    onClick={deleteImage}
+                                  >
+                                    מחק תמונה
+                                  </button>
+                                )}
+                              </>
                             )}
-                            <i className="fas fa-plus-circle add-picture-icon"></i>
+                            <i
+                              className="fas fa-plus-circle add-picture-icon"
+                              style={{ width: "100px" }}
+                            ></i>
                           </Form.Label>
                           <input
                             type="file"
@@ -320,7 +321,7 @@ const EditUser = () => {
                           {/* F.NAME & L.NAME */}
                           <Row style={{ marginTop: 20 }}>
                             <Col xl={6} sm={12}>
-                              <Form.Label>:שם</Form.Label>
+                              <Form.Label>שם:</Form.Label>
                               <Form.Control
                                 className="text-center"
                                 type="text"
@@ -338,7 +339,7 @@ const EditUser = () => {
                             </Col>
 
                             <Col xl={6}>
-                              <Form.Label>:שם משפחה</Form.Label>
+                              <Form.Label>שם משפחה:</Form.Label>
                               <Form.Control
                                 className="text-center"
                                 type="text"
@@ -361,7 +362,7 @@ const EditUser = () => {
                               className="mb-3"
                               controlId="formBasicEmail"
                             >
-                              <Form.Label>:כתובת אימייל שלך</Form.Label>
+                              <Form.Label>כתובת אימייל שלך:</Form.Label>
                               <Form.Control
                                 className="text-center"
                                 style={{ width: "100%" }}
@@ -386,7 +387,7 @@ const EditUser = () => {
                           {/* PHONE & CITY */}
                           <Row>
                             <Col xl={6}>
-                              <Form.Label>:טלפון נייד</Form.Label>
+                              <Form.Label>טלפון נייד:</Form.Label>
                               <Form.Control
                                 className="text-center"
                                 type="tel"
@@ -403,7 +404,7 @@ const EditUser = () => {
                               ) : null}{" "}
                             </Col>
                             <Col xl={6}>
-                              <Form.Label>:עיר</Form.Label>
+                              <Form.Label>עיר:</Form.Label>
                               <Form.Control
                                 className="text-center"
                                 type="text"
@@ -423,10 +424,9 @@ const EditUser = () => {
 
                           <br />
 
-                          {/* SEX & B.DATE */}
+                          {/* gender & B.DATE */}
                           <Row>
                             <Col>
-                              {/* <Form.Label htmlFor="gender">מין:</Form.Label> */}
                               <select
                                 className="text-center"
                                 aria-label="Default select example"
@@ -469,7 +469,7 @@ const EditUser = () => {
                           {/* PROFESSION */}
                           <hr />
                           <Row>
-                            <Form.Label>:אני גם בעל מקצוע</Form.Label>
+                            <Form.Label>אני גם בעל מקצוע:</Form.Label>
                             <Col>
                               <input
                                 label="מאלף"
@@ -510,6 +510,23 @@ const EditUser = () => {
                               ) : null}
                             </Col>
                           </Row>
+
+                          {cookies.data.admin && values.email !== config.admin && (
+                            <Row>
+                              <Col>
+                                <input
+                                  label="מנהל"
+                                  type="checkbox"
+                                  name="admin"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.admin}
+                                  checked={values.admin}
+                                />
+                                <Form.Label>מנהל</Form.Label>
+                              </Col>
+                            </Row>
+                          )}
                           <hr />
                           {/* BUTTON */}
 
@@ -532,6 +549,7 @@ const EditUser = () => {
                 </Formik>
               )}
             </Col>
+            <Col className="signUP-1-col" md={9} sm={false}></Col>
           </Row>
         </Container>
       )}

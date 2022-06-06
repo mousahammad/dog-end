@@ -1,6 +1,6 @@
 import React from "react";
 import PageHeader from "../common/pageHeader";
-import SearchBar from "../searchBar";
+
 import { Link } from "react-router-dom";
 
 const Category = () => {

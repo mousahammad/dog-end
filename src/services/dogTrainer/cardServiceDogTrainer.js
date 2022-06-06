@@ -3,18 +3,20 @@ import config from "../../config.json";
 
 export function createCardT(card) {
   // console.log(card);
-    return httpService.post(`${config.apiUrl}/cardTrain`, card);
+  return httpService.post(`${config.apiUrl}/cardTrain`, card);
 }
 
-export function getMyCards() {
-  // console.log("getMyCards");
-  return httpService.get(`${config.apiUrl}/cards/my-cards`);
+export function getAllCards() {
+  return httpService.get(`${config.apiUrl}/cardTrain`);
 }
 
 export function getCard(id) {
   return httpService.get(`${config.apiUrl}/cardTrain/${id}`);
 }
 
+export async function getCardsByTag(tag) {
+  return httpService.get(`${config.apiUrl}/cardTrain/serchByTag/${tag}`);
+}
 
 export async function getAllFavoriteTrainer() {
   return httpService.get(`${config.apiUrl}/cardTrain/getAllFavoriteTrainer`);
@@ -44,13 +46,12 @@ export function getCardsByUser(idUser) {
 }
 
 export function deleteCard(id) {
-  console.log("DeleteCard");
-  return httpService.delete(`${config.apiUrl}/cards/${id}`);
+  return httpService.delete(`${config.apiUrl}/cardTrain/${id}`);
 }
 
 const cardService = {
   createCardT,
-  getMyCards,
+  getAllCards,
   getCard,
   getAllFavoriteTrainer,
   checkFavoriteCard,
@@ -59,7 +60,7 @@ const cardService = {
   editCard,
   deleteCard,
   getCardsByUser,
-
+  getCardsByTag,
 };
 
 export default cardService;

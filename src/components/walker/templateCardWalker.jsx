@@ -5,18 +5,17 @@ import userService from "../../services/userService/userService";
 import walkerService from "../../services/dogWalker/cardServiceDogWalker";
 import { useCookies } from "react-cookie";
 import config from "../../config.json";
+import { BsFillSuitHeartFill } from "react-icons/bs";
+import { BsHeart } from "react-icons/bs";
 
 //card: contain details about cardWalker
 //setUpdatePage:update favorite page when delete it from favorite
 const TemplateCardWalker = ({ card, setUpdatePage }) => {
   const [cookies, setCookie] = useCookies(["data"]);
   const [load, setLoad] = useState({});
- 
+
   //variable its contains true if the card in the favorite
   const [cardFv, setCardFv] = useState(null);
-
-  //if current card add to favorite then update cuurent card
-  const [cardFvAdd, setCardFvAdd] = useState(false);
 
   // check if current card exists in the current user.
   const checkExistFavoriteCard = async () => {
@@ -40,12 +39,12 @@ const TemplateCardWalker = ({ card, setUpdatePage }) => {
       let user = await walkerService.addFavoriteCard({
         fDogWalker: [card.card._id],
       });
-      setCardFvAdd(true);
+      setCardFv({ data: true });
     } catch ({ response }) {
       console.log(response.data);
     }
   };
-
+  // delete from favorite cards
   const deleteFavoriteCard = async () => {
     try {
       if (!card) {
@@ -56,7 +55,7 @@ const TemplateCardWalker = ({ card, setUpdatePage }) => {
         fDogWalker: [card.card._id],
       });
 
-      setCardFvAdd(false);
+      setCardFv({ data: false });
       if (setUpdatePage) {
         window.location = "/favoriteWalker";
       }
@@ -67,120 +66,125 @@ const TemplateCardWalker = ({ card, setUpdatePage }) => {
 
   useEffect(() => {
     checkExistFavoriteCard();
-  }, [cardFvAdd]);
-
-  useEffect(() => {
-    checkExistFavoriteCard();
   }, []);
 
   if (load) {
-    return <h1>loading ...</h1>;
+    return <h1>הב הב מחכה לעצם ...</h1>;
   }
 
   return (
-    <>
-      <div className="containerTrainer mt-3 col-6">
-        {/* CARD */}
-        <div className="card">
-          <h3>{card.user.firstName}</h3>
-          <div className="imgBx">
-            <img
-              src={
-                card.user.image
-                  ? `${config.pictureUrl}${card.user._id}.jpg`
-                  : config.defaultImage
-              }
-            />
-          </div>
-          <div className="contentBx">
-            <div className="info">
-              <h2>{card.user.firstName}</h2>
-              <br />
-            </div>
-            <div className="info">
-              <h5> {`עלות : ${card.card.cost}`}</h5>
-            </div>
-            <div className="info">
-              <h5> {`שיטת אילוף : ${card.card.trainWay}`}</h5>
-            </div>
+    <div className="container col-sm-12 col-md-6 col-lg-4 borderStyle">
+      <div className="row">
+        {/* buttons */}
+        <div className="col-4 justify-content-center">
+          {/* delete */}
+          {card && card.card.user_id === cookies.data._id && (
+            <Link
+              className="ml-1 "
+              to={`/deleteCardWalker/${card.card._id}/profile`}
+            >
+              <button type="button" className="btnDelete ">
+                <i className="bi bi-trash"></i>
+              </button>
+            </Link>
+          )}
 
-            <button
-              type="button"
-              className=" buttonEmail "
-              onClick={() =>
-                (window.location = `mailto:tomaviram2187@gmail.com`)
-              }
-            >
-              <i className="bi bi-envelope contactMeStyle "></i>
-            </button>
-            {/* send Whatsapp massage */}
-            <button
-              type="button"
-              className=" buttonWhatsapp "
-              onClick={() =>
-                (window.location = `https://api.whatsapp.com/send?phone=+972528881056$&amp;text="Hi there! I have a question :)"`)
-              }
-            >
-              <i className="bi bi-whatsapp"></i>
-            </button>
-            {/* send find me */}
-            <button
-              type="button"
-              className=" buttonFindMe "
-              onClick={() =>
-                (window.location = `https://ul.waze.com/ul?place=ChIJH3w7GaZMHRURkD-WwKJy-8E&ll=32.08529990%2C34.78176760&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location`)
-              }
-            >
-              <i className="bi bi-geo contactMeStyle "></i>
-            </button>
-            <a href="mailTo:someone@yoursite.com">צור קשר</a>
-
-            {/* delete */}
-            {card && card.card.user_id === cookies.data._id && (
-              <Link className="ml-1 " to={`/deleteCardWalker/${card.card._id}`}>
-                <button type="button" className="btnDelete ">
-                  <i className="bi bi-trash"></i>
+          {/* edit button */}
+          {card && card.card.user_id === cookies.data._id && (
+            <Link to={`/editCardWalker/${card.card._id}/profile`}>
+              <b>
+                <button type="button" className=" m-1">
+                  <i className="bi bi-pen"></i>
                 </button>
-              </Link>
-            )}
-
-            {/* edit button */}
-            {card && card.card.user_id === cookies.data._id && (
-              <Link to={`/editCardWalker/${card.card._id}`}>
-                <b>
-                  <button type="button" className="btnEdit m-1">
-                    <i className="bi bi-pen"></i>
-                  </button>
-                </b>
-              </Link>
-            )}
-
-            {cardFv &&
-              !cardFv.data &&
-              card &&
-              card.card.user_id !== cookies.data._id && (
-                <button
-                  type="button"
-                  className="btnDelete "
-                  onClick={addFavoriteCard}
-                >
-                  ממועדפים
-                </button>
-              )}
-
-            {cardFv && cardFv.data && card.card.user_id !== cookies.data._id && (
+              </b>
+            </Link>
+          )}
+        </div>
+        <div className="col-4 mb-3 text-center">
+          {/* profile image of the profile */}
+          <img
+            className="zoomOut"
+            src={
+              card.user.image
+                ? `${config.pictureUrl}${card.user._id}.jpg`
+                : config.defaultImage
+            }
+          />
+        </div>
+        <div className="col-4 text-center">
+          {/* favorite Buttons */}
+          {cardFv &&
+            !cardFv.data &&
+            card &&
+            card.card.user_id !== cookies.data._id && (
               <button
                 type="button"
-                className="btnDelete"
-                onClick={deleteFavoriteCard}
+                className="Favorite_btn "
+                onClick={addFavoriteCard}
               >
-                הסרה ממועדפים
+                <BsHeart />
               </button>
             )}
-          </div>
+          {cardFv && cardFv.data && card.card.user_id !== cookies.data._id && (
+            <button
+              type="button"
+              className="FavoriteDele_btn"
+              onClick={deleteFavoriteCard}
+            >
+              <BsFillSuitHeartFill />
+            </button>
+          )}
         </div>
       </div>
-    </>
+      <div className="row justify-content-center">
+        <div className="col-12 text-center borderStyleColor">
+          <h2>{card.user.firstName}</h2>
+          <h5> {`עלות : ${card.card.cost}`} בשקלים</h5>
+          <h5> {`טלפון : ${card.user.phone}`}</h5>
+          <h5> {`אימייל : ${card.user.email}`}</h5>
+        </div>
+      </div>
+      <div className="row ">
+        <div className="col-12 text-center mt-3 justify-content-space-evenly">
+          {card.card.tags.map((tag) => {
+            return (
+              <button
+                key={tag}
+                onClick={() => {
+                  window.location = `/serchTagWalker/${tag}`;
+                }}
+                type="button"
+                className="tags "
+              >
+                {tag}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <hr />
+      <div className="row justify-content-center">
+        <div className="col-12 text-center  mb-3">
+          <button
+            type="button"
+            className=" buttonEmail "
+            onClick={() => (window.location = `mailto:tomaviram2187@gmail.com`)}
+          >
+            <i className="bi bi-envelope contactMeStyle "></i>
+          </button>
+          {/* send Whatsapp massage */}
+          <button
+            type="button"
+            className=" buttonWhatsapp "
+            onClick={() =>
+              (window.location = `https:api.whatsapp.com/send?phone=+972${card.phone}$&amp;text="Hi there! I have a question :)"`)
+            }
+          >
+            <i className="bi bi-whatsapp"></i>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 export default TemplateCardWalker;

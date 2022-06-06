@@ -51,6 +51,7 @@ const AllWalkersCards = () => {
         progress: undefined,
       });
       console.log(response);
+      
     }
   };
 
@@ -59,10 +60,10 @@ const AllWalkersCards = () => {
   }, []);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <h1>הב הב מחפש את העצם...</h1>;
   }
 
-  const cardsPerPage = 4;
+  const cardsPerPage = 6;
   const pagesVisited = pageNumber * cardsPerPage;
   const displayCards = cards
     .slice(pagesVisited, pagesVisited + cardsPerPage)

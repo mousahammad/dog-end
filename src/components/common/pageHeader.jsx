@@ -1,4 +1,4 @@
-import SearchBar from "../searchBar";
+
 
 
 const PageHeader = ({ title }) => {

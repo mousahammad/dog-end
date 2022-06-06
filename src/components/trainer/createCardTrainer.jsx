@@ -103,8 +103,9 @@ function CreateCardTrainer() {
           <div className="container ">
             <form onSubmit={handleSubmit} className="form-container">
               <label htmlFor="experience">ניסיון בשנים</label>
-
+              <br />
               <input
+                className="textSizeSelect"
                 type="number"
                 name="experience"
                 onChange={handleChange}
@@ -117,13 +118,11 @@ function CreateCardTrainer() {
               ) : null}
 
               <br />
-
-              <Meets setDays={setDays} days={days} />
-
-              {errorDay && <div className="text-danger">{errorDay}</div>}
-
+              <br />
               <label htmlFor="timeTrain">משך זמן האילוף</label>
+              <br />
               <select
+                className="textSizeSelect"
                 name="timeTrain"
                 id="timeTrain"
                 onChange={handleChange}
@@ -149,6 +148,7 @@ function CreateCardTrainer() {
               <br />
 
               <label htmlFor="cost">עלות מפגש:</label>
+              <br />
               <select
                 name="cost"
                 id="cost"
@@ -166,6 +166,7 @@ function CreateCardTrainer() {
               <br />
 
               <label htmlFor="trainWay">שיטת אילוף:</label>
+              <br />
               <select
                 name="trainWay"
                 id="trainWay"
@@ -183,8 +184,10 @@ function CreateCardTrainer() {
               <br />
               <br />
 
-              <label>Tags:</label>
+              <label className="Tags">תגיות חיפוש:</label>
+              <br />
               <input
+                className="tagsInput"
                 type="text"
                 name="tags"
                 onChange={handleChange}
@@ -193,10 +196,21 @@ function CreateCardTrainer() {
               />
               {errors.tags && touched.tags ? <div>{errors.tags}</div> : null}
 
+
+              <Meets setDays={setDays} days={days} />
+              <br />
+              {errorDay && <div className="text-danger">{errorDay}</div>}
+
+              
               <br />
               <br />
-              <button type="submit" id="regButton" disabled={isSubmitting}>
-                יצירת כרטיס
+              <button
+                className="submit"
+                type="submit"
+                id="regButton"
+                disabled={isSubmitting}
+              >
+                רישום כרטיס
               </button>
 
               {errorServ && <div className="text-danger">{errorServ}</div>}

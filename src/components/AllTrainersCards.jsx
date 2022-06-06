@@ -37,21 +37,7 @@ const AllTrainersCards = () => {
           <div className="col-lg-4 col-md-12">
             <TemplateCardTrainer />
           </div>
-          <div className="col-lg-4 col-md-12">
-            <TemplateCardTrainer />
-          </div>
-          <div className="col-lg-4 col-md-12">
-            <TemplateCardTrainer />
-          </div>
-          <div className="col-lg-4 col-md-12">
-            <TemplateCardTrainer />
-          </div>
-          <div className="col-lg-4 col-md-12">
-            <TemplateCardTrainer />
-          </div>
-          <div className="col-lg-4 col-md-12">
-            <TemplateCardTrainer />
-          </div>
+       
          
         </div>
       </div>
