@@ -66,9 +66,9 @@ const TempInput = ({ setDay, day }) => {
         handleSubmit,
         isSubmitting,
       }) => (
-        <div className="d-flex flex-column border border-1">
+        <div className="d-flex flex-column">
           <div className="d-flex justify-content-between ">
-            <div className="d-flex">
+            <div className="row col-4 d-flex">
               <label>"שעת התחלה:"</label>
 
               <select
@@ -95,7 +95,7 @@ const TempInput = ({ setDay, day }) => {
               </select>
             </div>
 
-            <div className="d-flex">
+            <div className="row col-4 d-flex">
               <label>"שעת סיום:"</label>
 
               <select
@@ -122,8 +122,8 @@ const TempInput = ({ setDay, day }) => {
               </select>
             </div>
 
-            <div className="d-flex">
-              <label>"סגור"</label>
+            <div className="row m-3">
+              <label className="text-center">"סגור"</label>
               <input
                 type="checkbox"
                 name="closed"

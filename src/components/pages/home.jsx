@@ -1,5 +1,5 @@
 import PageHeader from "../common/pageHeader";
-import SearchBar from "../searchBar";
+
 import Category from "./category";
 import { useCookies } from "react-cookie";
 

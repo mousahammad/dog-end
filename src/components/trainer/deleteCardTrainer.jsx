@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import WalkerService from "../../services/dogWalker/cardServiceDogWalker";
+import trainerService from "../../services/dogTrainer/cardServiceDogTrainer";
 
-function DeleteCardWalker({}) {
+function DeleteCardTrainer({}) {
   const params = useParams();
   const nav = useNavigate();
   const deleteCard = async () => {
-    await WalkerService.deleteCard(params.id);
+    await trainerService.deleteCard(params.id);
     nav(`/${params.location}`);
   };
   useEffect(() => {
@@ -15,4 +15,4 @@ function DeleteCardWalker({}) {
   return null;
 }
 
-export default DeleteCardWalker;
+export default DeleteCardTrainer;

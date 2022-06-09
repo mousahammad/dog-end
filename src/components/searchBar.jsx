@@ -13,9 +13,5 @@ const SearchBar = ({ placeholder, handleChange }) => {
   );
 };
 
-// SearchBar.propTypes = {
-//   placeholder: PropTypes.string.isRequired,
-//   handleChange: PropTypes.func.isRequired,
-// };
 
 export default SearchBar;

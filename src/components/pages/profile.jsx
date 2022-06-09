@@ -12,6 +12,8 @@ import EditCardWalker from "../walker/editCardWalker";
 import EditCardTrainer from "../trainer/editCardTrainer";
 import config from "../../config.json";
 import FavoriteWalker from "../walker/favoriteWalker";
+import TemplateCardTrainer from "../trainer/templateCardTrainer";
+import FavoriteTrainer from "../trainer/favoriteTrainer";
 
 function Profile() {
   const [cookies] = useCookies(["data"]);
@@ -59,200 +61,232 @@ function Profile() {
   }, []);
 
   if (load) {
-    return <h1>Loading ...</h1>;
+    return <h1>הב הב בעל הבית לא הגיע ...</h1>;
   }
 
   return (
-    <Container>
-      <div className="mt-3">
-        <div className="card">
-          {/* card body */}
-          <div className="card-body">
-            <h2 className="d-flex justify-content-center ">
-              My profile {data.dogWalker ? "as a dog-walker" : ""}
-              {data.dogWalker && data.dogTrainer ? " and" : ""}
-              {data.dogTrainer ? " as a dog-trainer" : ""}
-            </h2>
-            <div></div>
+    <div className="container">
+      <div className="row mt-2 py-2">
+        <div className="col-8 text-center">
+          <h1>
+            הפרופיל שלי {data.dogWalker ? "כ-דוגווקר" : ""}
+            {data.dogWalker && data.dogTrainer ? " וגם" : ""}
+            {data.dogTrainer ? " כ-מאלף כלבים" : ""}
+          </h1>
+        </div>
 
-            {/* edit button */}
-            <Link to={`/editUser`}>
-              <b>
-                <button type="button" className="btnEdit m-1">
-                  <i className="bi bi-pen"></i>עריכה
-                </button>
-              </b>
-            </Link>
-            {/* delete button */}
-            <span></span>
-            <Link className="ml-2 " to={`/my-cards/delete/`}>
-              <button type="button" className="btnDelete ">
-                <i className="bi bi-trash"></i> מחיקה
+        <div className="col-4 text-center">
+          {/* edit button */}
+          <Link to={`/editUser/${data._id}/profile`} className=" btn btnEdit">
+            <b>
+              
+              <i className="bi bi-pen"></i>עריכה
+              {/* </button> */}
+            </b>
+          </Link>
+          {/* delete button */}
+          <span></span>
+          <Link className="ml-2 " to={`/my-cards/delete/`}>
+            <button type="button" className="btnDelete">
+              <i className="bi bi-trash"></i> מחיקה
+            </button>
+          </Link>
+          {/* edit password */}
+          <Link to={`/reset-password/${cookies.data._id}/${cookies.token}`}>
+            <b>
+              <button type="button" className="ResetBtn mb-3">
+                <i className="bi bi-pen"></i>עריכת סיסמה
               </button>
-            </Link>
-
-            {/* card image */}
-            <div className="row">
-              <div className="col-lg-6 ">
-                <img
-                  src={
-                    data.image
-                      ? `${config.pictureUrl}${data._id}.jpg`
-                      : config.defaultImage
-                  }
-                  className="cardImg"
-                  alt="X"
-                />
-              </div>
-              <div className="col-lg-6">
-                <div className="buttonsCards">
-                  <br />
-                  <br />
-                  {/* -------------------------------------------- */}
-                  {/* CreateCardTrainer */}
-                  {data.dogTrainer && !dataT ? (
-                    <button
-                      type="button"
-                      className="CreateCardTrainer"
-                      onClick={() => setCardTrainer(!cardTrainer)}
-                    >
-                      <h5>יצירת כרטיס מאלפ/ת</h5>
-                    </button>
-                  ) : (
-                    dataT !== null && (
-                      <button
-                        type="button"
-                        className="CreateCardTrainer"
-                        onClick={() => setEditT(!editT)}
-                      >
-                        <h5>עריכת כרטיס מאלפ/ת</h5>
-                      </button>
-                    )
-                  )}
-                  {dataT !== null && editT && (
-                    <EditCardTrainer cardId={dataT.card._id} />
-                  )}
-                  <br />
-                  <br />
-                  {cardTrainer ? (
-                    <>
-                      <div className="container text-center">
-                        <h3>מאלפ/ת</h3>
-                      </div>
-                      <CreateCardTrainer />
-                    </>
-                  ) : (
-                    ""
-                  )}
-                  <br />
-                  <br />
-                  ------------------------------------------------------------
-                  {/*  CreateCardWalker  */}
-                  {data.dogWalker && !dataW ? (
-                    <button
-                      type="button"
-                      className="CreateCardWalker"
-                      onClick={() => setCardWalker(!cardWalker)}
-                    >
-                      <h5>יצירת כרטיס דוגווקר/ית</h5>
-                    </button>
-                  ) : (
-                    dataW !== null && (
-                      <button
-                        type="button"
-                        className="CreateCardWalker"
-                        onClick={() => setEditW(!editW)}
-                      >
-                        <h5>עריכת כרטיס דוגווקר/ית</h5>
-                      </button>
-                    )
-                  )}
-                  {dataW !== null && editW && (
-                    <EditCardWalker cardId={dataW.card._id} />
-                  )}
-                </div>
-                {cardWalker ? (
-                  <>
-                    <div className="container text-center">
-                      <h3>דוגווקר/ית</h3>
-                    </div>
-                    <CreateCardWalker />
-                  </>
-                ) : (
-                  ""
-                )}
-              </div>
-            </div>
-            {/* ---------------------------------------------------------------------------------------------- */}
-            <br />
-            <br />
-            <h5 className="cardName"> שם פרטי: {data.firstName}</h5>
-            <p className="cardTitle">
-              <b>
-                קצת עליי:
-                {data.dogWalker ? "a dog-walker" : ""}
-                {data.dogWalker && data.dogTrainer ? " and" : ""}
-                {data.dogTrainer ? " a dog-trainer" : ""}
-              </b>
-              <br />
-            </p>
-            <div className="card-text border-top pt-2">
-              <h3 className="cardInfo"> עוד קצת פרטים: </h3>
-              <b>טלפון:</b> <span>{data.phone}</span>
-              <br />
-              <b>כתובת:</b> <span>{data.city}</span>
-              <br />
-              <b>מייל:</b> <span>{data.email}</span>
-              <br />
-              <br />
-              <FavoriteWalker />
-              <br />
-            
-              <hr />
-              {/* buttons */}
-              <div className="col-md-12">
-                <div className="buttons">
-                  <br />
-                  <b>צור קשר: </b>
-                  <br />
-                  {/* send Email massage */}
-                  <button
-                    type="button"
-                    className=" buttonEmail "
-                    onClick={() => (window.location = `mailto:${data.email}`)}
-                  >
-                    <i className="bi bi-envelope contactMeStyle "></i>
-                  </button>
-                  {/* send Whatsapp massage */}
-                  <button
-                    type="button"
-                    className=" buttonWhatsapp "
-                    onClick={() =>
-                      (window.location = `https://api.whatsapp.com/send?phone=+972528881056$&amp;text="Hi there! I have a question :)"`)
-                    }
-                  >
-                    <i className="bi bi-whatsapp"></i>
-                  </button>
-                  {/* send find me */}
-                  <button
-                    type="button"
-                    className=" buttonFindMe "
-                    onClick={() =>
-                      (window.location = `https://ul.waze.com/ul?place=ChIJH3w7GaZMHRURkD-WwKJy-8E&ll=32.08529990%2C34.78176760&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location`)
-                    }
-                  >
-                    <i className="bi bi-geo contactMeStyle "></i>
-                  </button>
-                  {dataW !== null && dataW && (
-                    <TemplateCardWalker card={dataW} />
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+            </b>
+          </Link>
         </div>
       </div>
-    </Container>
+      {/* image profile */}
+      <div className="row">
+        <div className="col-sm-4 col-lg-4"></div>
+        <div className="col-sm-4 col-lg-4 text-center mt-5 ">
+          <img
+            src={
+              data.image
+                ? `${config.pictureUrl}${data._id}.jpg`
+                : config.defaultImage
+            }
+            className="cardImg mb-4 "
+            alt="profile photo"
+          />
+        </div>
+        <div className="col-sm-4 col-lg-4"></div>
+        <hr />
+      </div>
+      {/* contact me */}
+      <div className="row">
+        <div className="col-sm-6 col-md-4 ">
+          <h2 className="mb-1">צור קשר: </h2>
+          <br />
+        </div>
+        <div className="col-sm-6 col-md-4 text-center">
+          {/* send Email massage */}
+          <button
+            type="button"
+            className=" buttonEmail "
+            onClick={() => (window.location = `mailto:${data.email}`)}
+          >
+            <i className="bi bi-envelope"></i>
+          </button>
+          {/* send Whatsapp massage */}
+          <button
+            type="button"
+            className=" buttonWhatsapp "
+            onClick={() =>
+              (window.location = `https:wa.me/+972${data.phone.slice(1)}`)
+            }
+          >
+            <i className="bi bi-whatsapp"></i>
+          </button>
+        </div>
+      </div>
+      {/* main content of the profile */}
+      <div className="row">
+        <div className="col-sm-12 col-md-12 col-lg-4 mt-4">
+          <h4>
+            <b>שם:</b> {data.firstName}
+          </h4>
+          <h4>
+            <b>טלפון:</b> <span>{data.phone}</span>
+          </h4>
+          <h4>
+            <b>כתובת:</b> {data.city}
+          </h4>
+          <h4>
+            <b>אי-מייל:</b> {data.email}
+          </h4>
+        </div>
+        <div className="col-12 text-center mt-5 mb-5">
+          {data.dogWalker || data.dogTrainer ? (
+            <div className="cardTitle">
+              <h3>
+                <u>
+                  <b> תחום התמקצעות:</b>
+                </u>{" "}
+              </h3>
+              <div className="col-12">
+                <h1>
+                  {data.dogWalker ? "דוגווקר" : ""}
+                  {data.dogWalker && data.dogTrainer ? " ," : ""}
+                  {data.dogTrainer ? " אילוף כלבים" : ""}
+                </h1>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
+
+      {/* create cards */}
+      <div className="row">
+          {/* CreateCardTrainer */}
+        <div className="col-md-12 col-lg-6 text-center">
+          {data.dogTrainer && !dataT ? (
+            <button
+              type="button"
+              className="CreateCardTrainer"
+              onClick={() => setCardTrainer(!cardTrainer)}
+            >
+              <h5>יצירת כרטיס מאלפ/ת</h5>
+            </button>
+          ) : (
+            dataT !== null && (
+              <button
+                type="button"
+                className="CreateCardTrainer"
+                onClick={() => setEditT(!editT)}
+              >
+                <h5>עריכת כרטיס מאלפ/ת</h5>
+              </button>
+            )
+          )}
+          {dataT !== null && editT && (
+            <EditCardTrainer cardId={dataT.card._id} location={"profile"} />
+          )}
+          <br />
+          {cardTrainer ? (
+            <>
+              <div className="mt-5 text-center">
+                <h3>מאלפ/ת</h3>
+              </div>
+              <CreateCardTrainer />
+            </>
+          ) : (
+            ""
+          )}
+          
+        </div>
+
+        {/*  CreateCardWalker  */}
+        <div className="col-md-12 col-lg-6 text-center">
+          {data.dogWalker && !dataW ? (
+            <button
+              type="button"
+              className="CreateCardWalker"
+              onClick={() => setCardWalker(!cardWalker)}
+            >
+              <h5>יצירת כרטיס דוגווקר/ית</h5>
+            </button>
+          ) : (
+            dataW !== null && (
+              <button
+                type="button"
+                className="CreateCardWalker"
+                onClick={() => setEditW(!editW)}
+              >
+                <h5>עריכת כרטיס דוגווקר/ית</h5>
+              </button>
+            )
+          )}
+          {dataW !== null && editW && (
+            <EditCardWalker cardId={dataW.card._id} location={"profile"} />
+          )}
+
+          {cardWalker ? (
+            <>
+              <div className="mt-5 text-center">
+                <h3>דוגווקר/ית</h3>
+              </div>
+              <CreateCardWalker />
+            </>
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
+
+      {/* FavoriteCards */}
+      <div className="row mt-5">
+        <hr />
+        <div className="col-12 ">
+          <FavoriteWalker />
+          <FavoriteTrainer />
+        </div>
+      </div>
+      {/* My cards in the profile */}
+      <div className="col-md-12">
+        <div className="buttons">
+          <br />
+          {dataW !== null && dataW && (
+            <>
+              <h1>כרטיס דוגווקר שלי</h1>
+              <TemplateCardWalker card={dataW} />
+            </>
+          )}
+
+          {dataT !== null && dataT && (
+            <>
+              <h1>כרטיס מאלף שלי</h1>
+              <TemplateCardTrainer card={dataT} />
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

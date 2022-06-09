@@ -97,7 +97,7 @@ const SignUp = () => {
                 values.firstName.length > 255
               ) {
                 errors.firstName = "Invalid firstName";
-              } else if (/^[0-9]*$/i.test(values.firstName))
+              } else if (!/^[a-zA-Zא-ת]*$/i.test(values.firstName))
                 errors.firstName = "Your name is Invalid";
 
               if (!values.lastName) {
@@ -107,7 +107,7 @@ const SignUp = () => {
                 values.lastName.length > 255
               ) {
                 errors.lastName = "Invalid lastName";
-              } else if (/^[0-9]*$/i.test(values.lastName))
+              } else if (!/^[a-zA-Z א-ת]*$/i.test(values.lastName))
                 errors.lastName = "Your lastName is Invalid";
 
               if (!values.email) {

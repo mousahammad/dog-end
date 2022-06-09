@@ -15,18 +15,48 @@ export function createUser(user) {
 export function getInfoUser() {
   return httpService.get(`${config.apiUrl}/user/me`);
 }
+export function getStaticOnline() {
+  return httpService.get(`${config.apiUrl}/user/statusOnlineOffline`);
+}
 
 export function getInfoUserById(idUser) {
   return httpService.get(`${config.apiUrl}/user/${idUser}`);
 }
 
+export function getAllUsers() {
+  return httpService.get(`${config.apiUrl}/user`);
+}
+
+export function getAllUsersOnline() {
+  return httpService.get(`${config.apiUrl}/user/getUsersOnline`);
+}
+
+export function updatePassword(pass) {
+  return httpService.put(`${config.apiUrl}/user/reset-password`, pass);
+}
+
+export function sendEmailToRestPassword(email) {
+  return httpService.post(`${config.apiUrl}/user/forgot-password`, email);
+}
+
 export function saveImage(data) {
-  console.log(data);
   return httpService.post(`${config.apiUrl}/user/saveImage`, data);
 }
 
-export function editUser(data) {
-  return httpService.put(`${config.apiUrl}/user`, data);
+export function deleteImage(path) {
+  return httpService.put(`${config.apiUrl}/user/deleteImage/${path}`);
+}
+
+export function editUser(data, id) {
+  return httpService.put(`${config.apiUrl}/user/${id}`, data);
+}
+
+export function updateOnline() {
+  return httpService.put(`${config.apiUrl}/user/updateOnline`);
+}
+
+export function updateOffline() {
+  return httpService.put(`${config.apiUrl}/user/updateOffline`);
 }
 
 export function logout() {
@@ -69,6 +99,14 @@ const service = {
   getInfoUserById,
   editUser,
   saveImage,
+  sendEmailToRestPassword,
+  updatePassword,
+  getAllUsers,
+  deleteImage,
+  updateOffline,
+  updateOnline,
+  getAllUsersOnline,
+  getStaticOnline,
 };
 
 export default service;

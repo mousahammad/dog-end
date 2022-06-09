@@ -20,6 +20,10 @@ export async function getCard(id) {
   return httpService.get(`${config.apiUrl}/cardWalk/${id}`);
 }
 
+export async function getCardsByTag(tag) {
+  return httpService.get(`${config.apiUrl}/cardWalk/serchByTag/${tag}`);
+}
+
 export async function getAllFavoriteWalker() {
   return httpService.get(`${config.apiUrl}/cardWalk/getAllFavoriteWalker`);
 }
@@ -58,6 +62,7 @@ const cardService = {
   deleteFavoriteCard,
   getAllCards,
   getAllFavoriteWalker,
+  getCardsByTag,
 };
 
 export default cardService;

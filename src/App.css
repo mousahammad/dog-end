@@ -1,49 +1,139 @@
 body {
-  /* box-sizing: border-box; */
-  /* padding: 0px; */
-  /* margin: 0px; */
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  /* font-size: 22px; */
-  /* direction: rtl; */
+  direction: rtl;
+}
+.tdWidth {
+  width: 1%;
+}
+.zoomOut {
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  border-radius: 100%;
+  box-shadow: 0em 0em 1em rgb(116, 116, 116);
+  margin-bottom: 12px;
+  justify-content: space-between;
+}
+.cardImg {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  border: solid #000000 0px;
+  box-shadow: 1px 1px 12px 2px rgb(189, 188, 188);
+}
+.alert {
+  width: 100%;
+  height: 20rem;
+  border-radius: 18px;
+  border: solid #000000 0px;
+  box-shadow: 1px 1px 12px 2px rgb(189, 188, 188);
+}
+.borderStyle {
+  border: 6px solid rgb(22, 69, 53);
+  border-radius: 15px;
+  margin: 0px;
+  padding: 8px;
+}
+.borderStyleColor {
+  background-color: rgba(181, 222, 157, 0.374);
+  margin: 0px;
+  padding: 0px;
+}
+h5 {
+  margin: 10px;
+  padding: 15px;
+}
+
+input[type="number"],
+select {
+  width: 80%;
+  padding: 12px 30px;
+  margin: 8px 10px;
+  display: inline-block;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 6px 6px 10px 1px rgb(134, 134, 134);
+}
+.Tags {
+  font-size: 30px;
+  border-radius: 15px ;
+  width:100%;
+  margin-bottom: 15px;
+}
+.tagsInput {
+  width: 100%;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  border: 1px solid black;
+  border-radius: 14px;
+}
+.textSizeSelect {
+  font-size: 18px;
+}
+.submit {
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  font-size: 30px;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  text-shadow: 1px 2px 8px rgb(0, 0, 0);
+}
+
+.textStyle {
+  text-shadow: 1px 4px 8px rgb(144, 144, 144);
+  text-align: center;
+  color: #303030;
+  font-size: 54px;
 }
 
 .CreateCardTrainer {
   width: 100%;
-  height: 15%;
-  background-color: rgba(103, 153, 120, 0.322);
-  border-radius: 15px;
+  height: auto;
+  margin-top: 15px;
+  background-color: rgba(103, 129, 153, 0.322);
+  border-radius: 12px;
 }
 .CreateCardTrainer:hover {
   width: 100%;
-  height: 15%;
+  height: auto;
+  margin-top: 15px;
   background-color: rgba(108, 207, 141, 0.801);
-  border-radius: 15px;
+  border-radius: 12px;
 }
 .CreateCardWalker {
   width: 100%;
-  height: 15%;
+  margin-top: 15px;
+  height: auto;
   background-color: rgba(103, 129, 153, 0.322);
-  border-radius: 15px;
+  border-radius: 12px;
 }
 .CreateCardWalker:hover {
   width: 100%;
-  height: 15%;
+  margin-top: 15px;
+  height: auto;
   background-color: rgba(108, 207, 141, 0.801);
-  border-radius: 15px;
+  border-radius: 12px;
 }
 
+/* image profile in the navbar */
 .imageProfile {
   border-radius: 100%;
   width: 1.8em;
   height: 1.8em;
-  box-shadow: 1px 1px 6px rgb(77, 77, 77);
+  box-shadow: 1px 1px 5px rgb(77, 77, 77);
 }
 
 .center {
   display: flex;
   align-items: center;
   justify-content: center;
-  direction: rtl;
+  /* direction: rtl; */
 }
 
 .category_border {
@@ -60,68 +150,78 @@ body {
 }
 .navbarBackGroundColor {
   background-color: rgb(108, 154, 207);
-  color: #ffffff;
 }
 .whatsappStyle {
   background-color: green;
   color: white;
 }
 
-.btnEdit {
-  padding: 0.2em 1.5rem;
+.btnDelete {
+  padding: 0.1em 0.9rem;
   border-radius: 15px;
+  background-color: #df5e5e98;
+  margin-bottom: 10px;
 }
-.btnEdit:hover {
-  padding: 0.2em 1.5rem;
+.ResetBtn {
+  padding: 0.1em 0.9rem;
+  border-radius: 15px;
+  margin-right: 8px;
+  background-color: rgb(194, 166, 72);
+}
+.ResetBtn:hover {
+  padding: 0.1em 0.9rem;
+  border-radius: 15px;
+  background-color: rgb(234, 215, 69);
+}
+.btnEdit {
+  padding: 0.1em 0.9rem;
   border-radius: 15px;
   background-color: rgb(150, 199, 150);
+  margin-bottom: 10px;
 }
-.btnDelete {
-  padding: 0.2em 1.5rem;
-  border-radius: 35px;
+.btnEdit:hover {
+  padding: 0.1em 0.9rem;
+  border-radius: 15px;
+  background-color: rgb(19, 179, 118);
+
+  /* box-shadow: rgb(9, 255, 0) 2px 3px 9px; */
 }
 .btnDelete:hover {
+  padding: 0.1em 0.9rem;
+  border-radius: 15px;
+  background-color: rgb(255, 30, 0);
+  /* box-shadow: darkorange 2px 3px 9px; */
+}
+
+.Favorite_btn {
+  padding: 0.2em 0.5rem;
+  border-radius: 15px;
+  background-color: #ffffff;
+}
+
+.FavoriteDele_btn {
   padding: 0.2em 1.5rem;
   border-radius: 35px;
-  background-color: rgb(199, 156, 150);
 }
 
-.card {
-  padding: 7px;
-  width: 100%;
-  /* font-size: 10px; */
-}
-
-.cardImg {
-  width: 90%;
-  border-radius: 18px;
-  border: solid #000000 0px;
-  box-shadow: 2px 13px 8px rgb(189, 188, 188);
-}
-
-.buttonCall {
-  padding: 4px 16px;
-  background-color: rgb(66, 98, 145);
-  color: white;
-  box-shadow: 1px 1px 8px black;
-  border-radius: 7px;
-  border: solid #000000 1px;
-}
 .buttonEmail {
-  padding: 4px 16px;
+  padding: 4px 25px;
   background-color: rgb(57, 174, 182);
   color: white;
   box-shadow: 1px 1px 8px black;
-  border-radius: 7px;
+  border-radius: 15px;
+  /* margin-left: 1.2rem; */
   border: solid #000000 1px;
+  width: 50%;
 }
 .buttonWhatsapp {
-  padding: 4px 16px;
+  padding: 4px 25px;
   background-color: #25d366;
   color: white;
   box-shadow: 1px 1px 8px black;
-  border-radius: 7px;
+  border-radius: 15px;
   border: solid #000000 1px;
+  width: 50%;
 }
 .buttonFindMe {
   padding: 4px 16px;
@@ -165,7 +265,20 @@ body {
 }
 
 .tags {
-  box-shadow: 1px 9px 15px gray;
+  margin: 0px 15px;
+  box-shadow: 1px 6px 6px rgb(38, 34, 34);
+  background-color: rgb(163, 211, 210);
+  padding: 2px 15px;
+  color: #000000;
+  border-radius: 15px;
+}
+.tags:hover {
+  margin: 0px 15px;
+  box-shadow: 1px 6px 6px rgb(114, 113, 113);
+  background-color: rgb(108, 210, 209);
+  padding: 2px 15px;
+  color: #ffffff;
+  border-radius: 15px;
 }
 
 .img_banner {
@@ -184,7 +297,7 @@ body {
 }
 
 .paginationBttns {
-  width: 80%;
+  width: 100%;
   height: 40px;
   list-style: none;
   display: flex;
@@ -195,8 +308,8 @@ body {
   padding: 10px;
   margin: 8px;
   border-radius: 5px;
-  border: 1px solid ;
-  color: #2b2eff;
+  border: 1px solid;
+  color: #000000;
   cursor: pointer;
   border-color: gray;
 }
@@ -209,7 +322,7 @@ body {
 
 .paginationActive a {
   color: white;
-  background-color: #94f07daa;
+  background-color: #a0c497aa;
 }
 
 .paginationDisabled a {
@@ -219,4 +332,14 @@ body {
 .paginationDisabled a:hover {
   color: rgb(0, 0, 0);
   background-color: rgba(50, 50, 50, 0.415);
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(112, 150, 165, 0.467);
+  color: white;
+  text-align: center;
 }

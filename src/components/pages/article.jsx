@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 const Article = () => {
   return(
   <Container>
-    <div className="px-4 py-5 my-5 text-center">
+    <div className="row px-4 py-5 my-5 text-center">
       <img
         className="img_banner d-block mx-auto mb-4"
         src="https://images.pexels.com/photos/1485637/pexels-photo-1485637.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
