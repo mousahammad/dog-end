@@ -14,7 +14,7 @@ const GeneralArticle = ({ title, text }) => {
       <div className="row text-center">
         <div className="col-6">
 
-        <button onClick={()=>navigate(-1)}>back</button>
+        <button onClick={()=>navigate(-1)}>Back</button>
         </div>
       </div>
     </>
