@@ -2,7 +2,8 @@ import userService from "../../../services/userService/userService";
 import config from "../../../config.json";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
-
+import { BsWhatsapp } from "react-icons/bs";
+import { BsFillEnvelopeFill } from "react-icons/bs";
 import React, { useState, useEffect } from "react";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -55,33 +56,45 @@ const AllUsersOnline = () => {
     .slice(pagesVisited, pagesVisited + usersPerPage)
     .map((user, index) => {
       return (
-        <tr key={user._id}>
-          <td className="tdWidth">{index + 1 + pageNumber * usersPerPage}</td>
-          <td>{user.firstName + " " + user.lastName}</td>
-          <td>{user.email}</td>
-          <td>
+        <tr className="row align-itemm-center text-center" key={user._id}>
+          <td className="col-1 mx-3">
+            {index + 1 + pageNumber * usersPerPage}
+          </td>
+          <td className="col-3">{user.firstName + " " + user.lastName}</td>
+          <td className="col-3">
+            <button
+              className="btn btn"
+              onClick={() => {
+                window.location = `mailto:${user.email}`;
+              }}
+            >
+              <BsFillEnvelopeFill />
+            </button>
+          </td>
+
+          <td className="col-2 d-none d-md-block">
             <img
-              height="50px"
-              width="50px"
+              height="25px"
+              width="25px"
               src={
                 user.image
                   ? `${config.pictureUrl}${user._id}.jpg`
                   : config.defaultImage
               }
-              className="mb-4"
+              className="mb-4 "
               alt="profile photo"
             />
           </td>
 
-          <td>
+          <td className="col-2 align-item-center text-center">
             <button
               type="button"
-              className=" buttonWhatsapp "
+              className=" buttonWhatsapp text-center "
               onClick={() =>
                 (window.location = `https:api.whatsapp.com/send?phone=${user.phone}`)
               }
             >
-              צור קשר
+              <BsWhatsapp/>
             </button>
           </td>
         </tr>
@@ -106,38 +119,42 @@ const AllUsersOnline = () => {
 
   return (
     <>
-      {/* statistic */}
-      <div className="row">
-        <h2 className="col-6">
-          {onlineStatic.numberOnline}/{onlineStatic.numberUser}</h2>
+      <div className=" d-flex row text-center">
+        <h1> <u>משתמשים מחוברים</u></h1>
       </div>
+      {/* statistic */}
+      <div className="d-flex m-3">
+        <h4 className="mx-1">
+        {onlineStatic.numberUser} / <span style={{color: "green"}}> {onlineStatic.numberOnline}</span>  {" "} 
+          
+          <h4 > מחוברים</h4>
+           {" "}
+        </h4>
+             </div>
       {/* search input */}
       {userInfo.length ? (
         <>
           {" "}
           {pageNumber === 0 && (
-            <div className="row text-center">
-              <div className="col-2"></div>
-              <div className="d-flex col-8 flex-column">
-                <label>:חיפוש לפי שם או מייל</label>
+            <div className="row justify-content-center">
+              <div className="d-flex  flex-column">
+                <h4>חיפוש לפי שם או מייל:</h4>
 
                 <input
                   placeholder="הב הב אני מחכה לך..."
                   onChange={handleChange}
-                  className="col-6 "
                 />
               </div>
-              <div className="col-2 "></div>
             </div>
           )}
           <table className="table">
             <thead>
-              <tr>
-                <th>מספר</th>
-                <th>שם</th>
-                <th>מייל</th>
-                <th>תמונה פרופיל</th>
-                <th>צאט</th>
+              <tr className="row ">
+                <th className="col-1 mx-3 justify-content-center">מספר</th>
+                <th className="col-3">שם</th>
+                <th className="col-3">מייל</th>
+                <th className="col-2 d-none d-md-block">תמונה פרופיל</th>
+                <th className="col-2 "> צאט</th>
               </tr>
             </thead>
             <tbody>{displayUsers}</tbody>

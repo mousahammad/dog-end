@@ -7,8 +7,8 @@ body {
 }
 .zoomOut {
   z-index: -1;
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 80px;
   padding: 0px;
   border-radius: 100%;
   box-shadow: 0em 0em 1em rgb(116, 116, 116);
@@ -44,6 +44,15 @@ h5 {
   margin: 10px;
   padding: 15px;
 }
+.searchInput {
+  width: 50%;
+  text-align: center;
+  background-color:rgba(213, 213, 213, 0.33);
+  border: 1px solid;
+  /* border-radius: 8px; */
+  padding:5px 15px;
+
+}
 
 input[type="number"],
 select {
@@ -58,8 +67,8 @@ select {
 }
 .Tags {
   font-size: 30px;
-  border-radius: 15px ;
-  width:100%;
+  border-radius: 15px;
+  width: 100%;
   margin-bottom: 15px;
 }
 .tagsInput {

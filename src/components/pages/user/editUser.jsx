@@ -6,7 +6,7 @@ import { Formik } from "formik";
 
 import React, { useState, useEffect } from "react";
 
-import "../signUp.css";
+import "./signUp.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";

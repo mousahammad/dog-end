@@ -50,13 +50,13 @@ const AllCards = ({
           <h1 className="textStyle mb-3">{NameCards}</h1>
           <br />
           {pageNumber === 0 && (
-            <div className="">
-              <label>חיפוש בעל מקצוע לפי שם:</label>
+            <div className="mb-4 row d-flex justify-content-center ">
+              <label className=" d-flex justify-content-center">חיפוש בעל מקצוע לפי שם:</label>
               <br />
               <input
-                placeholder="הב הב אני מחכה לך..."
+                placeholder="חפש/י פה ...🔍"
                 onChange={handleChange}
-                className=""
+                className="searchInput"
               />
             </div>
           )}

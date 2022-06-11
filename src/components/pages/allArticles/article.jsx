@@ -1,19 +1,20 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import GeneralArticle from "./generalArticle";
 
-const Chat = () => {
+const Article = () => {
   return (
-    <Container>
-      <div className="px-4 py-5 my-5 text-center">
+    <>
+      {/* hero */}
+      <div className="d-flex flex-column px-4 py-2 my-5  text-center">
         <img
-          className="d-block mx-auto mb-4"
-          src="/docs/5.1/assets/brand/bootstrap-logo.svg"
+          className="img_banner d-block mx-auto mb-4"
+          src="https://images.pexels.com/photos/1485637/pexels-photo-1485637.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt=""
-          width="72"
-          height="57"
+          width="350"
+          height="210"
         />
-        <h1 className="display-5 fw-bold">Anton's Chat</h1>
+        <h1 className="display-5 fw-bold">מאמרים בתחום הכלבנות</h1>
         <div className="col-lg-6 mx-auto">
           <p className="lead mb-4">
             Quickly design and customize responsive mobile-first sites with
@@ -23,7 +24,7 @@ const Chat = () => {
           </p>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <button type="button" className="btn btn-primary btn-lg px-4 gap-3">
-              Primary button
+              take me
             </button>
             <button
               type="button"
@@ -33,9 +34,18 @@ const Chat = () => {
             </button>
           </div>
         </div>
+
+        <button
+          onClick={() => {
+            window.location = `/GeneralArticle/כלבים/loremdsfafafsas`;
+          }}
+        >
+          tom
+        </button>
+        
       </div>
-    </Container>
+    </>
   );
 };
 
-export default Chat;
+export default Article;

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import userService from "../../services/userService/userService";
+import userService from "../../../services/userService/userService";
 
 const updateStatus = async () => {
   try {

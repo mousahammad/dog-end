@@ -45,8 +45,7 @@ const FavoriteWalker = () => {
   return (
     //Comp, cards, setUpdatePage, loading, numberPage }
     <AllCards
-    
-      Comp={TemplateCardWalker}
+          Comp={TemplateCardWalker}
       cards={cards}
       setUpdatePage={true}
       loading={loading}

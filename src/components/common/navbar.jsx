@@ -1,9 +1,9 @@
 import React, { Component, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Nav, NavDropdown, NavLink } from "react-bootstrap";
-import userService from "../services/userService/userService";
+import userService from "../../services/userService/userService";
 import { useCookies } from "react-cookie";
-import config from "../config.json";
+import config from "../../config.json";
 import { useState } from "react";
 
 const NavbarComp = () => {
@@ -22,7 +22,7 @@ const NavbarComp = () => {
         let user = await userService.getInfoUser();
         setCookie("data", user.data);
         if (!cookies.data) {
-          return <p>Loading ...</p>;
+          return <p>טוען תוכן...</p>;
         } else {
           await userService.updateOnline();
         }
@@ -35,7 +35,7 @@ const NavbarComp = () => {
   }, []);
 
   if (loading) {
-    return "<h1> loading ...</h1>";
+    return "<h1> טוען את התוכן המבוקש ...</h1>";
   }
 
   window.addEventListener("unload", updateStatusOffline);
@@ -88,9 +88,6 @@ const NavbarComp = () => {
                     <NavDropdown.Item href="/logout" title="יציאה">
                       יציאה <i className="bi bi-box-arrow-in-right"></i>
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="/myPark">
-                      הגינה שלי
-                    </NavDropdown.Item>
                   </>
                 )}
               </NavDropdown>
@@ -107,8 +104,8 @@ const NavbarComp = () => {
                     <NavDropdown.Item href="/dogwalker">
                       דוגווקר
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="/myPark">
-                      הגינה שלי
+                    <NavDropdown.Item href="/Article">
+                      מאמרים
                     </NavDropdown.Item>
                   </NavDropdown>
                   <Nav.Link href="/favoriteWalker" title="דוג ווקר מועדפים">

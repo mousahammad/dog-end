@@ -77,20 +77,19 @@ function Profile() {
 
         <div className="col-4 text-center">
           {/* edit button */}
-          <Link to={`/editUser/${data._id}/profile`} className=" btn btnEdit">
-            <b>
-              
-              <i className="bi bi-pen"></i>עריכה
-              {/* </button> */}
-            </b>
+          <Link className="mr-2" to={`/editUser/${data._id}/profile`}>
+            <button type="button" className="btnEdit">
+              <i className="bi bi-pen"></i> עריכה
+            </button>
           </Link>
+
           {/* delete button */}
-          <span></span>
           <Link className="ml-2 " to={`/my-cards/delete/`}>
             <button type="button" className="btnDelete">
               <i className="bi bi-trash"></i> מחיקה
             </button>
           </Link>
+
           {/* edit password */}
           <Link to={`/reset-password/${cookies.data._id}/${cookies.token}`}>
             <b>
@@ -119,32 +118,11 @@ function Profile() {
         <hr />
       </div>
       {/* contact me */}
-      <div className="row">
-        <div className="col-sm-6 col-md-4 ">
-          <h2 className="mb-1">צור קשר: </h2>
-          <br />
-        </div>
-        <div className="col-sm-6 col-md-4 text-center">
-          {/* send Email massage */}
-          <button
-            type="button"
-            className=" buttonEmail "
-            onClick={() => (window.location = `mailto:${data.email}`)}
-          >
-            <i className="bi bi-envelope"></i>
-          </button>
-          {/* send Whatsapp massage */}
-          <button
-            type="button"
-            className=" buttonWhatsapp "
-            onClick={() =>
-              (window.location = `https:wa.me/+972${data.phone.slice(1)}`)
-            }
-          >
-            <i className="bi bi-whatsapp"></i>
-          </button>
-        </div>
-      </div>
+     
+
+
+
+      
       {/* main content of the profile */}
       <div className="row">
         <div className="col-sm-12 col-md-12 col-lg-4 mt-4">
@@ -183,7 +161,7 @@ function Profile() {
 
       {/* create cards */}
       <div className="row">
-          {/* CreateCardTrainer */}
+        {/* CreateCardTrainer */}
         <div className="col-md-12 col-lg-6 text-center">
           {data.dogTrainer && !dataT ? (
             <button
@@ -218,7 +196,6 @@ function Profile() {
           ) : (
             ""
           )}
-          
         </div>
 
         {/*  CreateCardWalker  */}
@@ -268,23 +245,28 @@ function Profile() {
         </div>
       </div>
       {/* My cards in the profile */}
-      <div className="col-md-12">
-        <div className="buttons">
-          <br />
+      <div className="row text-center">
+        <h1 className="col-12 my-5">
+          <u> הכרטיסים שלי</u>{" "}
+        </h1>
+      </div>
+      
+      <div className="row">
+        <div className="col-12 col-md-6">
           {dataW !== null && dataW && (
             <>
-              <h1>כרטיס דוגווקר שלי</h1>
+              <h3>כרטיס דוגווקר שלי</h3>
               <TemplateCardWalker card={dataW} />
             </>
           )}
-
-          {dataT !== null && dataT && (
-            <>
-              <h1>כרטיס מאלף שלי</h1>
-              <TemplateCardTrainer card={dataT} />
-            </>
-          )}
         </div>
+
+        {dataT !== null && dataT && (
+          <div className="col-12 col-md-6">
+            <h3>כרטיס מאלף שלי</h3>
+            <TemplateCardTrainer card={dataT} />
+          </div>
+        )}
       </div>
     </div>
   );

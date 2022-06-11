@@ -1,4 +1,4 @@
-import userService from "../../services/userService/userService";
+import userService from "../../../services/userService/userService";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 import { Formik } from "formik";
@@ -9,7 +9,7 @@ import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import "./signUp.css";
-import config from "../../config.json";
+import config from "../../../config.json";
 
 const SignUp = () => {
   const navigate = useNavigate();
