@@ -24,7 +24,7 @@ const AllCards = ({
     .slice(pagesVisited, pagesVisited + cardsPerPage)
     .map((card) => {
       return (
-        <div key={card.card._id} className="col-sm-12 col-md-6 col-lg-4 mb-4">
+        <div key={card.card._id} className="col-12 col-md-6 mb-4">
           <Comp key={card.card._id} card={card} setUpdatePage={setUpdatePage} />
         </div>
       );
@@ -49,35 +49,32 @@ const AllCards = ({
         <div className="container mt-1">
           <h1 className="textStyle mb-3">{NameCards}</h1>
           <br />
-          {pageNumber == 0 && (
-            <div className="row">
-              <div className="">
-                <label>חיפוש בעל מקצוע לפי שם:</label>
-                <br />
-                <input
-                  placeholder="הב הב אני מחכה לך..."
-                  onChange={handleChange}
-                  className=""
-                />
-              </div>
+          {pageNumber === 0 && (
+            <div className="mb-4 row d-flex justify-content-center ">
+              <label className=" d-flex justify-content-center">חיפוש בעל מקצוע לפי שם:</label>
+              <br />
+              <input
+                placeholder="חפש/י פה ...🔍"
+                onChange={handleChange}
+                className="searchInput"
+              />
             </div>
           )}
-          <br />
-          <br />
           <div className="row">{displayCards}</div>
-          <br />
-          <br />
-          <ReactPaginate
-            previousLabel={"Previous"}
-            nextLabel={"Next"}
-            pageCount={pageCount}
-            onPageChange={changePage}
-            containerClassName={"paginationBttns"}
-            previousLinkClassName={"previousBttn"}
-            nextLinkClassName={"nextBttn"}
-            disabledClassName={"paginationDisabled"}
-            activeClassName={"paginationActive"}
-          />
+
+          <div className="mt-5 text-center">
+            <ReactPaginate
+              previousLabel={"Previous"}
+              nextLabel={"Next"}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={"paginationBttns"}
+              previousLinkClassName={"previousBttn"}
+              nextLinkClassName={"nextBttn"}
+              disabledClassName={"paginationDisabled"}
+              activeClassName={"paginationActive"}
+            />
+          </div>
         </div>
       ) : (
         <h1 className="text-danger">{Message}</h1>

@@ -7,7 +7,7 @@ function DeleteCardWalker({}) {
   const nav = useNavigate();
   const deleteCard = async () => {
     await WalkerService.deleteCard(params.id);
-    nav("/profile");
+    nav(`/${params.location}`);
   };
   useEffect(() => {
     deleteCard();

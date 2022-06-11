@@ -6,10 +6,10 @@ import { Formik } from "formik";
 
 import React, { useState, useEffect } from "react";
 
-import { useNavigate } from "react-router-dom";
-import "../signUp.css";
+import "./signUp.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useCookies } from "react-cookie";
+import { useParams } from "react-router-dom";
 const TOKEN_KEY = "token";
 
 const getDateFormat = (date) => {
@@ -27,26 +27,28 @@ const getDateFormat = (date) => {
 const EditUser = () => {
   const [cookies, setCookie] = useCookies(["data"]);
   const [load, setLoad] = useState(true);
-
-  const navigate = useNavigate();
+  const params = useParams();
 
   //image upload states
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [userInfo, setUserInf] = useState(null);
   const [imgError, setImgError] = useState("");
+
+  if (!cookies.data) {
+    window.location = "/login";
+  }
   // const regButton = document.getElementById("regButton");
 
   //get information about user from data base
   const getInfoUser = async () => {
     try {
-      if (!cookies.data) {
-        navigate("/login");
+      if (!params.id) {
+        window.location = "/login";
       }
-
       setLoad(true);
 
-      let info = await userService.getInfoUserById(cookies.data._id);
+      let info = await userService.getInfoUserById(params.id);
 
       if (info.data[0].image) {
         setImagePreview(config.pictureUrl + info.data[0]._id + ".jpg");
@@ -81,6 +83,19 @@ const EditUser = () => {
     }
     console.log("change img");
   }
+
+  const deleteImage = async () => {
+    try {
+      await userService.deleteImage(params.id);
+      setUserInf((userInfo) => {
+        return { ...userInfo, image: false };
+      });
+
+      setImagePreview(config.defaultImage);
+    } catch ({ response }) {
+      console.log(response.data);
+    }
+  };
 
   if (load) {
     return <h1>טעון תוכן ...</h1>;
@@ -209,7 +224,7 @@ const EditUser = () => {
                         image: values.image,
                       };
 
-                      const user = await userService.editUser(data);
+                      const user = await userService.editUser(data, params.id);
                       console.log(user.data.token);
                       setCookie(TOKEN_KEY, user.data.token);
                       if (values.image) {
@@ -229,7 +244,7 @@ const EditUser = () => {
                         draggable: true,
                         progress: undefined,
                       });
-                      window.location = `/profile`;
+                      window.location = `/${params.location}`;
                     } catch ({ response }) {
                       console.log(response.data);
                     }
@@ -255,16 +270,27 @@ const EditUser = () => {
                             className="image-upload-label"
                           >
                             {imagePreview !== null && (
-                              <img
-                                src={imagePreview}
-                                className="account-img"
-                                alt="account-image"
-                                style={{
-                                  width: "100%",
-                                  height: "auto",
-                                  borderRadius: "35px",
-                                }}
-                              />
+                              <>
+                                <img
+                                  src={imagePreview}
+                                  className="account-img"
+                                  alt="account-image"
+                                  style={{
+                                    width: "100%",
+                                    height: "auto",
+                                    borderRadius: "35px",
+                                  }}
+                                />
+
+                                {imagePreview !== config.defaultImage && (
+                                  <button
+                                    className="btn btn-danger"
+                                    onClick={deleteImage}
+                                  >
+                                    מחק תמונה
+                                  </button>
+                                )}
+                              </>
                             )}
                             <i
                               className="fas fa-plus-circle add-picture-icon"
@@ -484,6 +510,23 @@ const EditUser = () => {
                               ) : null}
                             </Col>
                           </Row>
+
+                          {cookies.data.admin && values.email !== config.admin && (
+                            <Row>
+                              <Col>
+                                <input
+                                  label="מנהל"
+                                  type="checkbox"
+                                  name="admin"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.admin}
+                                  checked={values.admin}
+                                />
+                                <Form.Label>מנהל</Form.Label>
+                              </Col>
+                            </Row>
+                          )}
                           <hr />
                           {/* BUTTON */}
 

@@ -6,7 +6,7 @@ import cardService from "../../services/dogWalker/cardServiceDogWalker";
 import commonService from "../../services/commonService";
 import { useParams } from "react-router-dom";
 
-function EditCardWalker({ cardId }) {
+function EditCardWalker({ cardId, location }) {
   const params = useParams();
   let val = cardId ? cardId : params.id;
   const [days, setDays] = useState("");
@@ -33,7 +33,7 @@ function EditCardWalker({ cardId }) {
   }, []);
 
   if (load) {
-    return <h1>Loading ..</h1>;
+    return <h1>טוען תוכן ..</h1>;
   }
 
   return (
@@ -91,7 +91,9 @@ function EditCardWalker({ cardId }) {
                 meets: days,
               });
 
-              window.location = "/profile";
+              let loc = location ? location : params.location;
+
+              window.location = `/${loc}`;
             } catch ({ response }) {
               setErrorServ(response.data);
             }
@@ -109,27 +111,29 @@ function EditCardWalker({ cardId }) {
           }) => (
             // form inputs
             <div className="container ">
-              <form onSubmit={handleSubmit} className="form-container">
-                <label htmlFor="experience">ניסיון בשנים</label>
-                <br />
-                <input
-                  type="number"
-                  name="experience"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.experience}
-                  placeholder="ניסיון בשנים"
-                />
-                {errors.experience && touched.experience ? (
-                  <div>{errors.experience}</div>
-                ) : null}
-                <br />
-                <br />
-                {days && <Meets setDays={setDays} days={days} />}
-                {errorDay && <div className="text-danger">{errorDay}</div>}
-                <br />
-                <div className="row">
-                  <div className="justify-content-center">
+              <form onSubmit={handleSubmit} className="form-container ">
+                <div className="col-12">
+                  <h3>דוגווקר</h3>
+                  <br />
+                  <label htmlFor="experience" className="mt-4">
+                    ניסיון בשנים
+                  </label>
+                  <br />
+                  <input
+                    className="tagsInput"
+                    type="number"
+                    name="experience"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.experience}
+                    placeholder="ניסיון בשנים"
+                  />
+                  {errors.experience && touched.experience ? (
+                    <div>{errors.experience}</div>
+                  ) : null}
+                  <br />
+                  <br />
+                  <div className="row">
                     <label htmlFor="timeWalker">משך זמן טיול</label>
                     <br />
                     <select
@@ -156,8 +160,9 @@ function EditCardWalker({ cardId }) {
                     ) : null}
                     <br />
                     <br />
-
-                    <label htmlFor="cost">עלות טיול:</label>
+                    <label htmlFor="cost" className="mt-3">
+                      עלות טיול:
+                    </label>
                     <br />
                     <select
                       name="cost"
@@ -176,10 +181,18 @@ function EditCardWalker({ cardId }) {
                     ) : null}
                     <br />
                     <br />
+                    <div className="meets mt-3">
+                      {days && <Meets setDays={setDays} days={days} />}
+                      {errorDay && (
+                        <div className="text-danger">{errorDay}</div>
+                      )}
+                    </div>
+                    <br />
 
                     <label>תגיות חיפוש</label>
                     <br />
                     <input
+                      className="Tags"
                       type="text"
                       name="tags"
                       onChange={handleChange}
@@ -191,12 +204,19 @@ function EditCardWalker({ cardId }) {
                     ) : null}
                     <br />
                     <br />
+
+                    <button
+                    className="submit"
+                      type="submit"
+                      id="regButton"
+                      disabled={isSubmitting}
+                    >
+                      עדכון כרטיס
+                    </button>
+                    {errorServ && (
+                      <div className="text-danger">{errorServ}</div>
+                    )}
                   </div>
-                  <br />
-                  <button type="submit" id="regButton" disabled={isSubmitting}>
-                    עדכון כרטיס
-                  </button>
-                  {errorServ && <div className="text-danger">{errorServ}</div>}
                 </div>
               </form>
             </div>

@@ -38,15 +38,15 @@ const AllTrainersCards = () => {
       setLoading(false);
     } catch ({ response }) {
       // ToastContainer
-      toast.error("לא התחברת לא יהיה תוכן! 😯", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      // toast.error("לא התחברת לא יהיה תוכן! 😯", {
+      //   position: "top-center",
+      //   autoClose: 3000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      // });
       console.log(response);
     }
   };
@@ -59,10 +59,14 @@ const AllTrainersCards = () => {
     return (
       <div className="Container">
         <div className="row">
-          <div className="text-center">
-            <br />
-            <h1>טוען תוכן ...</h1>
+          <div className="col-sm-12 col-md-3 "></div>
+          <div className="col-sm-12 col-md-6 text-center mt-5">
+            <h1 className="alert align-items center">
+              כדי לצפות בעמוד מאלפים <br />
+              יש להתחבר לשירות 🐶
+            </h1>
           </div>
+          <div className="col-sm-12 col-md-3 "></div>
         </div>
       </div>
     );

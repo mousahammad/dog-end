@@ -39,13 +39,13 @@ const FavoriteWalker = () => {
   }, []);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <h1>טוען תוכן...</h1>;
   }
 
   return (
     //Comp, cards, setUpdatePage, loading, numberPage }
     <AllCards
-      Comp={TemplateCardWalker}
+          Comp={TemplateCardWalker}
       cards={cards}
       setUpdatePage={true}
       loading={loading}

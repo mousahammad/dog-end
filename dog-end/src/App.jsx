@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-// import userService from "./services/userService/userService";
+import userService from "./services/userService/userService";
 
 // CSS
 import "./App.css";
@@ -14,14 +14,13 @@ import { ToastContainer } from "react-toastify";
 
 // components
 import Home from "./components/pages/home";
-import Footer from "./components/footer";
-import SignUp from "./components/pages/signUp";
-import LoginTo from "./components/pages/login";
-import Logout from "./components/pages/logOut";
-import Chat from "./components/pages/chat";
-import MyPark from "./components/pages/myPark";
-import Article from "./components/pages/article";
-import Navigation from "./components/navigation";
+import Footer from "./components/common/footer";
+import SignUp from "./components/pages/user/signUp";
+import LoginTo from "./components/pages/user/login";
+import Logout from "./components/pages/user/logOut";
+
+import Article from "./components/pages/allArticles/article";
+import Navbar from "./components/common/navbar";
 import AllwalkersCards from "./components/walker/AllWalkersCards";
 import AllTrainersCards from "./components/trainer/AllTrainersCards";
 import Profile from "./components/pages/profile";
@@ -44,13 +43,17 @@ import SerchWalkerTags from "./components/walker/serchWalkerTags";
 import SerchTrainerTags from "./components/trainer/serchTrainerTags";
 import ForgotEmail from "./components/pages/user/frogotEmail";
 import UpdatePassword from "./components/pages/user/updatePassword";
+import AllUsers from "./components/pages/user/allUsers";
+import AllUsersOnline from "./components/pages/user/allUsersOnline";
+import GeneralArticle from "./components/pages/allArticles/generalArticle";
 
 function App() {
   const param = useParams();
+
   return (
     <BrowserRouter>
       <ToastContainer />
-      <Navigation />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
@@ -58,9 +61,11 @@ function App() {
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/login" element={<LoginTo />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/myPark" element={<MyPark />} />
         <Route path="/article" element={<Article />} />
+        <Route
+          path="/GeneralArticle/:title/:text"
+          element={<GeneralArticle />}
+        />
         <Route path="/dogwalker" element={<AllwalkersCards />} />
         <Route path="/dogtrainer" element={<AllTrainersCards />} />
         <Route path="/profile" element={<Profile />} />
@@ -69,17 +74,32 @@ function App() {
         <Route path="/cardTrainer" element={<CardTrainer />} />
         <Route path="/createCardTrainer" element={<CreateCardTrainer />} />
         <Route path="/createCardWalker" element={<CreateCardWalker />} />
-        <Route path="/deleteCardWalker/:id" element={<DeleteCardWalker />} />
-        <Route path="/deleteCardTrainer/:id" element={<DeleteCardTrainer />} />
-        <Route path="/editCardWalker/:id" element={<EditCardWalker />} />
-        <Route path="/editCardTrainer/:id" element={<EditCardTrainer />} />
-        <Route path="/editUser" element={<EditUser />} />
+
+        <Route
+          path="/deleteCardWalker/:id/:location"
+          element={<DeleteCardWalker />}
+        />
+        <Route
+          path="/deleteCardTrainer/:id/:location"
+          element={<DeleteCardTrainer />}
+        />
+        <Route
+          path="/editCardWalker/:id/:location"
+          element={<EditCardWalker />}
+        />
+        <Route
+          path="/editCardTrainer/:id/:location"
+          element={<EditCardTrainer />}
+        />
+        <Route path="/editUser/:id/:location" element={<EditUser />} />
         <Route path="/favoriteWalker" element={<FavoriteWalker />} />
         <Route path="/favoriteTrainer" element={<FavoriteTrainer />} />
         <Route path="/serchTagWalker/:tag" element={<SerchWalkerTags />} />
         <Route path="/serchTagTrainer/:tag" element={<SerchTrainerTags />} />
         <Route path="/sendEmail" element={<ForgotEmail />} />
         <Route path="/reset-password/:id/:token" element={<UpdatePassword />} />
+        <Route path="/allUsers" element={<AllUsers />} />
+        <Route path="/allUsersOnline" element={<AllUsersOnline />} />
       </Routes>
       <Footer className="footer-all" />
     </BrowserRouter>

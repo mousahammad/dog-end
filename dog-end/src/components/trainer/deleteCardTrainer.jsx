@@ -7,7 +7,7 @@ function DeleteCardTrainer({}) {
   const nav = useNavigate();
   const deleteCard = async () => {
     await trainerService.deleteCard(params.id);
-    nav("/profile");
+    nav(`/${params.location}`);
   };
   useEffect(() => {
     deleteCard();

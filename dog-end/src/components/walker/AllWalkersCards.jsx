@@ -49,7 +49,6 @@ const AllWalkersCards = () => {
         progress: undefined,
       });
       console.log(response);
-      
     }
   };
 
@@ -61,10 +60,14 @@ const AllWalkersCards = () => {
     return (
       <div className="Container">
         <div className="row">
-          <div className="text-center">
-            <br />
-            <h1>טוען תוכן ...</h1>
+          <div className="col-sm-12 col-md-3 "></div>
+          <div className="col-sm-12 col-md-6 text-center mt-5">
+            <h1 className="alert align-items center">
+              כדי לצפות בעמוד דוגווקרים <br />
+              יש להתחבר לשירות 🐶
+            </h1>
           </div>
+          <div className="col-sm-12 col-md-3 "></div>
         </div>
       </div>
     );

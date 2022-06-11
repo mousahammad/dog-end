@@ -18,7 +18,8 @@ const Meets = ({ setDays, days }) => {
   }, [sun, mon, tues, wen, turs, fri, sat]);
 
   return (
-    <div className="d-flex flex-column">
+    <div className="d-flex flex-column textSizeSelect">
+      
       <label>ראשון:</label> <TempInput setDay={setSun} day={sun} />
       <label>שני:</label> <TempInput setDay={setMon} day={mon} />
       <label>שלישי:</label> <TempInput setDay={setTues} day={tues} />

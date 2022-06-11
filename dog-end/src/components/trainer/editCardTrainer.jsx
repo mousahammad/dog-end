@@ -6,7 +6,7 @@ import cardService from "../../services/dogTrainer/cardServiceDogTrainer";
 import commonService from "../../services/commonService";
 import { useParams } from "react-router-dom";
 
-function EditCardTrainer({ cardId }) {
+function EditCardTrainer({ cardId, location }) {
   const params = useParams();
   let val = cardId ? cardId : params.id;
   const [days, setDays] = useState("");
@@ -94,7 +94,9 @@ function EditCardTrainer({ cardId }) {
                 meets: days,
               });
 
-              window.location = "/profile";
+              let loc = location ? location : params.location;
+
+              window.location = `/${loc}`;
             } catch ({ response }) {
               setErrorServ(response.data);
             }
@@ -111,32 +113,31 @@ function EditCardTrainer({ cardId }) {
             isSubmitting,
           }) => (
             // form inputs
-            <div className="container ">
+            <div className="container row ">
               <form onSubmit={handleSubmit} className="form-container">
-                <label htmlFor="experience">ניסיון בשנים</label>
-                <br />
-                <input
-                  type="number"
-                  name="experience"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.experience}
-                  placeholder="experience"
-                />
-                {errors.experience && touched.experience ? (
-                  <div>{errors.experience}</div>
-                ) : null}
-                <br />
-                <br />
-
-                {days && <Meets setDays={setDays} days={days} />}
-
-                {errorDay && <div className="text-danger">{errorDay}</div>}
-                <br />
-                <div className="row">
-                  <div className="justify-content-center">
+                <div className="col-12">
+                  <br />
+                  <h3>מאלף</h3>
+                  <label htmlFor="experience" className="mt-4">
+                    ניסיון בשנים
+                  </label>
+                  <br />
+                  <input
+                    className="tagsInput"
+                    type="number"
+                    name="experience"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.experience}
+                    placeholder="experience"
+                  />
+                  {errors.experience && touched.experience ? (
+                    <div>{errors.experience}</div>
+                  ) : null}
+                  <br />
+                  <br />
+                  <div className="row">
                     <label htmlFor="timeTrain">משך זמן האילוף</label>
-                    <br />
                     <select
                       name="timeTrain"
                       id="timeTrain"
@@ -162,7 +163,9 @@ function EditCardTrainer({ cardId }) {
                     <br />
                     <br />
 
-                    <label htmlFor="cost">עלות אילוף:</label>
+                    <label htmlFor="cost" className="mt-3">
+                      עלות אילוף:
+                    </label>
                     <br />
                     <select
                       name="cost"
@@ -179,9 +182,12 @@ function EditCardTrainer({ cardId }) {
                     {errors.cost && touched.cost ? (
                       <div>{errors.cost}</div>
                     ) : null}
+
                     <br />
                     <br />
-                    <label htmlFor="trainWay">שיטת אילוף:</label>
+                    <label htmlFor="trainWay" className="mt-3">
+                      שיטת אילוף:
+                    </label>
                     <br />
                     <select
                       name="trainWay"
@@ -189,6 +195,7 @@ function EditCardTrainer({ cardId }) {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.trainWay}
+                      className="mt-2 mb-5"
                     >
                       <option value="">בחר/י</option>
                       <option value="true">חיובי</option>
@@ -199,9 +206,18 @@ function EditCardTrainer({ cardId }) {
                     ) : null}
                     <br />
                     <br />
+                    <div className="meets mt-3">
+                      {days && <Meets setDays={setDays} days={days} />}
+                      {errorDay && (
+                        <div className="text-danger">{errorDay}</div>
+                      )}
+                    </div>
+                    <br />
+
                     <label>תגיות חיפוש</label>
                     <br />
                     <input
+                      className="Tags"
                       type="text"
                       name="tags"
                       onChange={handleChange}
@@ -211,14 +227,22 @@ function EditCardTrainer({ cardId }) {
                     {errors.tags && touched.tags ? (
                       <div>{errors.tags}</div>
                     ) : null}
-                    <br />
-                    <br />
                   </div>
+
                   <br />
-                  <button type="submit" id="regButton" disabled={isSubmitting}>
-                    עדכון כרטיס
-                  </button>
-                  {errorServ && <div className="text-danger">{errorServ}</div>}
+                  <div className="row">
+                    <button
+                    className="submit"
+                      type="submit"
+                      id="regButton"
+                      disabled={isSubmitting}
+                    >
+                      עדכון כרטיס
+                    </button>
+                    {errorServ && (
+                      <div className="text-danger">{errorServ}</div>
+                    )}
+                  </div>
                 </div>
               </form>
             </div>

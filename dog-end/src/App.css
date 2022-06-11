@@ -2,11 +2,13 @@ body {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   direction: rtl;
 }
-
+.tdWidth {
+  width: 1%;
+}
 .zoomOut {
   z-index: -1;
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 80px;
   padding: 0px;
   border-radius: 100%;
   box-shadow: 0em 0em 1em rgb(116, 116, 116);
@@ -14,13 +16,19 @@ body {
   justify-content: space-between;
 }
 .cardImg {
-  width: auto;
-  height: 100%;
+  width: 100%;
+  height: auto;
   border-radius: 18px;
   border: solid #000000 0px;
   box-shadow: 1px 1px 12px 2px rgb(189, 188, 188);
 }
-
+.alert {
+  width: 100%;
+  height: 20rem;
+  border-radius: 18px;
+  border: solid #000000 0px;
+  box-shadow: 1px 1px 12px 2px rgb(189, 188, 188);
+}
 .borderStyle {
   border: 6px solid rgb(22, 69, 53);
   border-radius: 15px;
@@ -36,10 +44,55 @@ h5 {
   margin: 10px;
   padding: 15px;
 }
+.searchInput {
+  width: 50%;
+  text-align: center;
+  background-color:rgba(213, 213, 213, 0.33);
+  border: 1px solid;
+  /* border-radius: 8px; */
+  padding:5px 15px;
 
-/* h3 {
-  text-decoration: underline;
-} */
+}
+
+input[type="number"],
+select {
+  width: 80%;
+  padding: 12px 30px;
+  margin: 8px 10px;
+  display: inline-block;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 6px 6px 10px 1px rgb(134, 134, 134);
+}
+.Tags {
+  font-size: 30px;
+  border-radius: 15px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.tagsInput {
+  width: 100%;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  border: 1px solid black;
+  border-radius: 14px;
+}
+.textSizeSelect {
+  font-size: 18px;
+}
+.submit {
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  font-size: 30px;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  text-shadow: 1px 2px 8px rgb(0, 0, 0);
+}
 
 .textStyle {
   text-shadow: 1px 4px 8px rgb(144, 144, 144);
@@ -50,25 +103,29 @@ h5 {
 
 .CreateCardTrainer {
   width: 100%;
-  height: 15%;
+  height: auto;
+  margin-top: 15px;
   background-color: rgba(103, 129, 153, 0.322);
   border-radius: 12px;
 }
 .CreateCardTrainer:hover {
   width: 100%;
-  height: 15%;
+  height: auto;
+  margin-top: 15px;
   background-color: rgba(108, 207, 141, 0.801);
   border-radius: 12px;
 }
 .CreateCardWalker {
   width: 100%;
-  height: 15%;
+  margin-top: 15px;
+  height: auto;
   background-color: rgba(103, 129, 153, 0.322);
   border-radius: 12px;
 }
 .CreateCardWalker:hover {
   width: 100%;
-  height: 15%;
+  margin-top: 15px;
+  height: auto;
   background-color: rgba(108, 207, 141, 0.801);
   border-radius: 12px;
 }
@@ -164,6 +221,7 @@ h5 {
   border-radius: 15px;
   /* margin-left: 1.2rem; */
   border: solid #000000 1px;
+  width: 50%;
 }
 .buttonWhatsapp {
   padding: 4px 25px;
@@ -172,6 +230,7 @@ h5 {
   box-shadow: 1px 1px 8px black;
   border-radius: 15px;
   border: solid #000000 1px;
+  width: 50%;
 }
 .buttonFindMe {
   padding: 4px 16px;
@@ -247,7 +306,7 @@ h5 {
 }
 
 .paginationBttns {
-  width: 80%;
+  width: 100%;
   height: 40px;
   list-style: none;
   display: flex;
