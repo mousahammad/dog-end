@@ -111,6 +111,8 @@ const ForgotEmail = () => {
                         שלח/י
                       </button>
 
+                    </div>
+                  </form>
                       <button
                         className=" btn btn-lg btn-secondary btn-block text-center col-12 col-md-4"
                         onClick={() => navigate(-1)}
@@ -121,8 +123,6 @@ const ForgotEmail = () => {
                           <FaBackspace />
                         </span>
                       </button>
-                    </div>
-                  </form>
                 </div>
               </div>
             </div>
