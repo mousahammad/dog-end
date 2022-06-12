@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import userService from "../../../services/userService/userService";
 import { Formik } from "formik";
-import { useCookies } from "react-cookie";
-import { Link, Route } from "react-router-dom";
+
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { FaBackspace } from "react-icons/fa";
 
 const ForgotEmail = () => {
+  const navigate = useNavigate();
   return (
     <Container>
       <Formik
@@ -63,46 +64,66 @@ const ForgotEmail = () => {
           isSubmitting,
         }) => (
           <>
-            <div className="center mt-5">
-              <img
-                className="imgCoverDogs mb-4"
-                src="https://img.freepik.com/free-photo/group-portrait-adorable-puppies_53876-64778.jpg?t=st=1650619440~exp=1650620040~hmac=8cf1416422a68fccc45146015ef62624c1765e14da062568f06b482d207ec974&w=900"
-                alt="dogs pic"
-                width="auto"
-                height="auto"
-              />
-            </div>
-            {/* login form */}
-            <br />
-            <div className="container loginForm col-md-6">
-              <div className="text-center pt-4 mt-3 ">
-                <form onSubmit={handleSubmit} className="form-signin ">
-                  <h1 className="h3 mb-3 font-weight-normal">..קדימה להתחבר</h1>
+            <div className="sendEmailStyle ">
+              <h1 className="text-center">שיחזור סיסמה</h1>
+              <div className="center mt-5">
+                <img
+                  className="imgCoverDogs mb-4"
+                  src="https://img.freepik.com/free-photo/front-view-beautiful-dog-with-copy-space_23-2148786560.jpg?t=st=1655018902~exp=1655019502~hmac=241c22303580ad2124fb55aba85d1bd8b1584a482f4c8fb5e7122dbf769b9019&w=1380"
+                  alt="dogs pic"
+                  width="auto"
+                  height="auto"
+                />
+              </div>
 
-                  <label htmlFor="inputEmail" className="sr-only">
-                    אימייל
-                  </label>
-                  <input
-                    type="text"
-                    name="email"
-                    className="form-control"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                    placeholder="email"
-                  />
-                  {errors.email && touched.email ? (
-                    <div>{errors.email}</div>
-                  ) : null}
+              {/* login form */}
+              <br />
+              <div className="container  col-md-12">
+                <div className="text-center pt-4 mt-3 ">
+                  <form onSubmit={handleSubmit} className="form-signin ">
+                    <h1 className="h3 mb-3 font-weight-normal">
+                      שחזור סיסמה חדשה
+                    </h1>
 
-                  <button
-                    className="btn btn-lg btn-primary btn-block"
-                    type="submit"
-                    disabled={isSubmitting}
-                  >
-                    שלח
-                  </button>
-                </form>
+                    <label htmlFor="inputEmail" className="sr-only">
+                      אימייל
+                    </label>
+                    <input
+                      type="text"
+                      name="email"
+                      className="form-control "
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                      placeholder="נא להכניס את המייל שלך"
+                    />
+                    {errors.email && touched.email ? (
+                      <div>{errors.email}</div>
+                    ) : null}
+
+
+                    <div className="mt-3 my-3 mb-3 row justify-content-center">
+                      <button
+                        className=" btn btn-lg btn-primary btn-block col-12 col-md-4"
+                        type="submit"
+                        disabled={isSubmitting}
+                      >
+                        שלח/י
+                      </button>
+
+                      <button
+                        className=" btn btn-lg btn-secondary btn-block text-center col-12 col-md-4"
+                        onClick={() => navigate(-1)}
+                      >
+                        {" "}
+                        אחורה
+                        <span className="mx-3 text-center">
+                          <FaBackspace />
+                        </span>
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </>

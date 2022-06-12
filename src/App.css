@@ -47,11 +47,10 @@ h5 {
 .searchInput {
   width: 50%;
   text-align: center;
-  background-color:rgba(213, 213, 213, 0.33);
+  background-color: rgba(213, 213, 213, 0.33);
   border: 1px solid;
   /* border-radius: 8px; */
-  padding:5px 15px;
-
+  padding: 5px 15px;
 }
 
 input[type="number"],
@@ -159,6 +158,8 @@ select {
 }
 .navbarBackGroundColor {
   background-color: rgb(108, 154, 207);
+  padding: 0px;
+  margin: 0px;
 }
 .whatsappStyle {
   background-color: green;
@@ -242,8 +243,15 @@ select {
 }
 
 .imgCoverDogs {
-  width: 92%;
+  width: 100%;
   border-radius: 15px;
+}
+
+.centered {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .form-control {
@@ -262,11 +270,39 @@ select {
   box-shadow: 1px 9px 15px rgb(166, 172, 160);
 }
 .loginForm {
+  
   border-radius: 15px;
+  width: 50%;
   padding: 20px 55px;
-  background-color: rgba(108, 154, 207, 0.384);
+  background-color: rgba(120, 184, 186, 0.384);
   box-shadow: 1px 9px 15px rgb(166, 172, 160);
 }
+
+.sendEmailStyle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* width: 400px; */
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(155, 155, 155, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+
+
+.sendEmailStyle h1 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+.sendEmailStyle .user-box {
+  position: relative;
+}
+
 
 .info {
   font-size: 18px;

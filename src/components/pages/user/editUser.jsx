@@ -98,7 +98,7 @@ const EditUser = () => {
   };
 
   if (load) {
-    return <h1>טעון תוכן ...</h1>;
+    return <h1>טוען תוכן ...</h1>;
   }
 
   return (
@@ -428,7 +428,7 @@ const EditUser = () => {
                           <Row>
                             <Col>
                               <select
-                                className="text-center"
+                                className="text-center p-1"
                                 aria-label="Default select example"
                                 name="gender"
                                 id="gender"

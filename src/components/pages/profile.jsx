@@ -83,13 +83,6 @@ function Profile() {
             </button>
           </Link>
 
-          {/* delete button */}
-          <Link className="ml-2 " to={`/my-cards/delete/`}>
-            <button type="button" className="btnDelete">
-              <i className="bi bi-trash"></i> מחיקה
-            </button>
-          </Link>
-
           {/* edit password */}
           <Link to={`/reset-password/${cookies.data._id}/${cookies.token}`}>
             <b>
