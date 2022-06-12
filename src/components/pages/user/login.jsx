@@ -86,7 +86,11 @@ const LoginTo = () => {
             <div className="center mt-5">
               <img
                 className="imgCoverDogs mb-4"
+<<<<<<< HEAD:src/components/pages/user/login.jsx
                 src="https://img.freepik.com/free-photo/group-portrait-adorable-puppies_53876-64777.jpg?t=st=1655018902~exp=1655019502~hmac=bb4186f5d4e5498345f0eb4c761204a9444095a8a4b48fdab656558595794250&w=1380"
+=======
+                src="https://img.freepik.com/free-photo/group-portrait-adorable-puppies_53876-64778.jpg?t=st=1650619440~exp=1650620040~hmac=8cf1416422a68fccc45146015ef62624c1765e14da062568f06b482d207ec974&w=900"
+>>>>>>> 283f06138af101ed3a1369bea2e109eeeae023a6:dog-end/src/components/pages/user/login.jsx
                 alt="dogs pic"
                 width="auto"
                 height="auto"
@@ -133,12 +137,17 @@ const LoginTo = () => {
                   <br />
 
                   <button
+<<<<<<< HEAD:src/components/pages/user/login.jsx
                     className="btn btn-lg btn-primary btn-block  col-12 col-md-4"
+=======
+                    className="btn btn-lg btn-primary btn-block"
+>>>>>>> 283f06138af101ed3a1369bea2e109eeeae023a6:dog-end/src/components/pages/user/login.jsx
                     type="submit"
                     disabled={isSubmitting}
                   >
                     כניסה
                   </button>
+<<<<<<< HEAD:src/components/pages/user/login.jsx
 
                   <button
                     className="mx-3 btn btn-lg btn-secondary btn-block  col-12 col-md-4"
@@ -149,6 +158,18 @@ const LoginTo = () => {
                     שיחזור סיסמה
                   </button>
                 </form>
+=======
+                </form>
+
+                <button
+                  className="btn btn-lg btn-primary btn-block"
+                  onClick={() => {
+                    navigate("/sendEmail");
+                  }}
+                >
+                  שכחתי סייסמה
+                </button>
+>>>>>>> 283f06138af101ed3a1369bea2e109eeeae023a6:dog-end/src/components/pages/user/login.jsx
               </div>
             </div>
           </>
