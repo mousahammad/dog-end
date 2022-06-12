@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import userService from "./services/userService/userService";
+//import userService from "./services/userService/userService";
 
 // CSS
 import "./App.css";
@@ -46,6 +46,7 @@ import UpdatePassword from "./components/pages/user/updatePassword";
 import AllUsers from "./components/pages/user/allUsers";
 import AllUsersOnline from "./components/pages/user/allUsersOnline";
 import GeneralArticle from "./components/pages/allArticles/generalArticle";
+import ProtectAdmin from "./components/pages/user/protectAdmin";
 
 function App() {
   const param = useParams();
@@ -98,7 +99,14 @@ function App() {
         <Route path="/serchTagTrainer/:tag" element={<SerchTrainerTags />} />
         <Route path="/sendEmail" element={<ForgotEmail />} />
         <Route path="/reset-password/:id/:token" element={<UpdatePassword />} />
-        <Route path="/allUsers" element={<AllUsers />} />
+        <Route
+          path="/allUsers"
+          element={
+            <ProtectAdmin admin>
+              <AllUsers />
+            </ProtectAdmin>
+          }
+        />
         <Route path="/allUsersOnline" element={<AllUsersOnline />} />
       </Routes>
       <Footer className="footer-all" />
